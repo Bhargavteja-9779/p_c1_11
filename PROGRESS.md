@@ -1,7 +1,7 @@
 # PROGRESS (resume file — read this first)
 
 Pipeline per user prompt v2 (novelty-first). Root of deliverables: `Target_Journal_Submission/`.
-Resume rule: read this file, continue from "NEXT ACTION". Every phase is committed and pushed to branch `claude/festive-dijkstra-htib9c`.
+Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `claude/festive-dijkstra-htib9c`; session 2+ branch: `claude/affectionate-galileo-agi7pp`.
 
 ## Environment notes
 - 4 CPU, 15 GB RAM, no GPU. Python 3.13. Network: Crossref, OpenAlex, arXiv, UCI reachable. ScienceDirect/Elsevier pages blocked (403). Springer journal pages behind JS challenge (curl).
@@ -35,3 +35,5 @@ Resume rule: read this file, continue from "NEXT ACTION". Every phase is committ
 2. D6 Round 4: label-free delta adaptation per setting (from unlabelled stratum time share), Pareto curves, 10 seeds, patient-level bootstrap CIs; MIMIC locked test touched once per final candidate. Scripts to reuse: experiments/r2_new_onset.py, r3_state_aware.py, src/evaluation/metrics.py (alarm_simulation has new-onset/recurrent split).
 3. Write novelty_scorecard.md (honest; current candidate core: N1 new-onset formulation + N7 shortcut finding + N6 3-cohort validation + N2 state-aware policy; first-passage = secondary/negative result).
 4. Then: GRU baseline (pip install torch cpu), full experiments (exp1..exp5 per protocol), figures, manuscript (Critical Care style), 11 reviews, docx, cover letter, risk report.
+
+- [2026-11-23] SESSION 2 started: deps reinstalled; downloads relaunched (MIMIC 32 workers ~500 rec/min; VitalDB; eICU demo done). metrics.py: faster _stay_alarms (identical output, verified) + AlarmSim (precomputed, stratum attribution, two-threshold label-free allocation, patient-level bootstrap). experiments/r4_label_free.py written (H-R4 stated in header). protocol_amendments.md A1 written.
