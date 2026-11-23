@@ -24,9 +24,16 @@ def one(rec, out):
     if os.path.exists(fn) or os.path.exists(skip): return "cached"
     for k in range(4):
         try:
-            h = wfdb.rdheader(name, pn_dir=f"{PN}/{d}")
-            if not any(s in h.sig_name for s in CH["MAP"]): open(skip, "w").close(); return "nomap"
-            r = wfdb.rdrecord(name, pn_dir=f"{PN}/{d}")
+            base = f"https://physionet.org/files/{PN}/{d}/{name}"
+            tmp = os.path.join(out, "_tmp"); os.makedirs(tmp, exist_ok=True)
+            hea = urllib.request.urlopen(base + ".hea", timeout=60).read().decode()
+            if not any(re.search(r"\s" + re.escape(s) + r"\s*$", line) for line in hea.splitlines() for s in CH["MAP"]):
+                open(skip, "w").close(); return "nomap"
+            open(os.path.join(tmp, name + ".hea"), "w").write(hea)
+            datf = hea.splitlines()[1].split()[0]
+            open(os.path.join(tmp, datf), "wb").write(urllib.request.urlopen(f"https://physionet.org/files/{PN}/{d}/{datf}", timeout=120).read())
+            r = wfdb.rdrecord(os.path.join(tmp, name))
+            os.remove(os.path.join(tmp, name + ".hea")); os.remove(os.path.join(tmp, datf))
             fs = float(r.fs); sig = r.p_signal
             df = pd.DataFrame({k2: (sig[:, r.sig_name.index(next(s for s in v if s in r.sig_name))] if any(s in r.sig_name for s in v) else np.nan)
                                for k2, v in CH.items()})
