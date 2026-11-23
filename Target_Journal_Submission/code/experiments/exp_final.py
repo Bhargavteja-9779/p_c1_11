@@ -85,6 +85,9 @@ for seed in SEEDS:
         sc.update(LR=logit(lr.predict_proba(D[fc].to_numpy(float))), GBM=logit(gB.predict_proba(D[fc])))
         if os.path.exists(gru_f): sc["GRU"] = np.load(gru_f)[D.row.to_numpy()].astype(float)
         sA = logit(gA.predict_proba(D[fc]))
+        sd = os.path.join(OUT, "scores"); os.makedirs(sd, exist_ok=True)  # saved for exp_extra.py (no analysis change)
+        np.save(f"{sd}/{k}_GBM_seed{seed}.npy", sc["GBM"].astype("float32")); np.save(f"{sd}/{k}_newGBM_seed{seed}.npy", sA.astype("float32"))
+        if seed == SEEDS[0]: np.save(f"{sd}/{k}_MAP.npy", det[k]["MAP"].astype("float32"))
         # time-point metrics (probabilistic methods get calibration)
         for m, s in sc.items():
             r = dict(seed=seed, cohort=k, method=m, **point_metrics(y, s))
