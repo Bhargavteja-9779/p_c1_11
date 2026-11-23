@@ -10,7 +10,9 @@ COLS = ["MAP", "SBP", "DBP", "HR", "SpO2", "RESP"]
 def iter_mimic(limit=None):
     files = sorted(glob.glob(os.path.join(C.DATA_CACHE, "mimic3wdb", "*.parquet")))
     for f in files[:limit]:
-        df = pd.read_parquet(f)
+        try: df = pd.read_parquet(f)
+        except Exception as e:
+            print("unreadable", f, repr(e), flush=True); continue
         if df["MAP"].notna().sum() < 60: continue
         subj = df["subject"].iloc[0]; rec = df["record"].iloc[0]
         df.index = df.index.round("1min"); df = df[~df.index.duplicated()].asfreq("1min")
@@ -56,6 +58,8 @@ def build_table(stay, keep_every=1):
     F = compute_features(df, dt)
     idx = np.where(lab["eligible"])[0]
     if keep_every > 1: idx = idx[idx % keep_every == 0]
+    keep = idx[lab["observed"][C.PRIMARY_H][idx]]  # drop points whose primary-horizon outcome is censored (end of record)
+    idx = keep
     T = F.iloc[idx].reset_index(drop=True)
     T["t_idx"] = idx.astype(np.int32); T["t_min"] = (idx * dt).astype(np.int32)
     for H in C.HORIZONS:

@@ -1,0 +1,18 @@
+{
+ "n_train": 60000,
+ "n_tune_val": 60000,
+ "seeds": [
+  0,
+  1
+ ],
+ "gru_seeds": [
+  0
+ ],
+ "hp": 3,
+ "gru_hp": 1,
+ "rf_hp": 1,
+ "n_boot": 200,
+ "frac_eval": 0.15,
+ "mode": "quick",
+ "tables": "../../data_cache/tables_quick"
+}

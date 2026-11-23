@@ -57,7 +57,16 @@ def compute_features(df, dt):
     with np.errstate(invalid="ignore", divide="ignore"):
         F["shock_index"] = F["hr_now"] / sbp
     F["map_valid_frac_30"] = rolling_stat(np.isfinite(df["MAP"].to_numpy(float)).astype(float), k(30), "mean")
-    return pd.DataFrame(F, index=df.index).astype("float32")
+    out = pd.DataFrame(F, index=df.index).astype("float32")
+    # sequence inputs for the GRU comparator: 5-min block means, 12 blocks = last 60 min (lag 0 = most recent block)
+    S = {}
+    b = max(1, int(round(5 / dt)))
+    for c in ("MAP", "HR", "SpO2", "SBP", "DBP"):
+        x = _ffill(df[c].to_numpy(float), lim) if c in df else np.full(len(df), np.nan)
+        bm = pd.Series(x).rolling(b, min_periods=1).mean().to_numpy()
+        for lag in range(12):
+            S[f"seq_{c.lower()}_{lag}"] = np.concatenate([np.full(lag * b, np.nan), bm[:len(bm) - lag * b]]) if lag else bm
+    return pd.concat([out, pd.DataFrame(S, index=df.index).astype("float16")], axis=1)
 
 FEATURES_MAP_ONLY = None  # filled lazily
 def feature_names(df_feat, map_only=False):
