@@ -1,0 +1,2 @@
+{'journal': 'Critical Care', 'issn': '1364-8535', 'publisher': 'Springer Nature/BMC', 'n': 97, 'median': 56, 'p75': 82, 'p90': 100, 'max': 179, 'mean': 55.4, 'share_le72': 0.68, 'note': ''}
+{'journal': 'Annals of Intensive Care', 'issn': '2110-5820', 'publisher': 'Springer Nature', 'n': 0, 'note': 'no received/accepted dates in Crossref'}
