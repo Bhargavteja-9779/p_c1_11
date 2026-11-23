@@ -85,3 +85,95 @@ def threshold_for_burden(df, score_col, stays, target, H=C.PRIMARY_H, iters=22):
         if r["alarms_per_hour"] > target: lo = mid
         else: hi = mid
     return best
+
+
+class AlarmSim:
+    """Fast, equivalent re-implementation of alarm_simulation + summarize_alarms.
+    Stay structure (eligible times, onsets, evaluable events, new-onset flags) is precomputed once;
+    each call only thresholds the score and walks the (few) supra-threshold points."""
+    def __init__(self, df, stays, H=C.PRIMARY_H, min_lead=C.MIN_LEAD, silence=C.ALARM_SILENCE):
+        self.H, self.silence = H, silence
+        self.min_lead = min_lead
+        sid0 = df["stay_id"].astype(str).to_numpy(); t0 = df["t_min"].to_numpy(float)
+        self.pos = np.lexsort((t0, sid0)); sid = df["stay_id"].to_numpy()[self.pos]; t = t0[self.pos]
+        cut = np.flatnonzero(sid0[self.pos][1:] != sid0[self.pos][:-1]) + 1
+        self.bounds = np.r_[0, cut, len(sid)]; self.t = t
+        self.sids = sid[self.bounds[:-1]]
+        self.hours, self.ev_lo, self.ev_hi, self.ev_new, self.onsets, self.groups = [], [], [], [], [], []
+        for k, s in enumerate(self.sids):
+            ts = t[self.bounds[k]:self.bounds[k + 1]]; info = stays[s]; on = np.array(info["onsets_min"], float)
+            lo_l, hi_l, new_l = [], [], []
+            for j, o in enumerate(on):
+                lo, hi = o - H, o - min_lead
+                a = np.searchsorted(ts, lo, side="left")
+                if a >= len(ts) or ts[a] > hi: continue
+                lo_l.append(lo); hi_l.append(hi)
+                new_l.append((not ((on[:j] >= o - 360) & (on[:j] < o)).any()) and (ts.min() <= o - 60))
+            self.ev_lo.append(np.array(lo_l)); self.ev_hi.append(np.array(hi_l)); self.ev_new.append(np.array(new_l, bool))
+            self.onsets.append(on); self.hours.append(len(ts) * info["dt"] / 60.0); self.groups.append(info["group_id"])
+        self.hours = np.array(self.hours); self.n_ev = np.array([len(x) for x in self.ev_lo])
+        self.n_new = np.array([x.sum() for x in self.ev_new])
+
+    def sorted_score(self, score):
+        """score: array/Series in the positional row order of the df given at construction."""
+        return np.asarray(score, float)[self.pos]
+
+    def set_mark(self, mark):
+        """Optional boolean per row (original order), e.g. stratum A; alarms fired at marked rows are counted separately."""
+        self.mark = np.asarray(mark, bool)[self.pos]
+        self.hours_mark = np.array([self.mark[self.bounds[k]:self.bounds[k + 1]].sum() for k in range(len(self.sids))], float) * \
+            (self.hours / np.maximum(np.diff(self.bounds), 1))
+
+    def per_stay(self, s, thr):
+        """s: score already in sorted order (see sorted_score). Returns per-stay arrays."""
+        n = len(self.sids); n_al = np.zeros(n, int); n_true = np.zeros(n, int); n_w = np.zeros(n, int); n_wn = np.zeros(n, int)
+        n_am = np.zeros(n, int); mk = getattr(self, "mark", None)
+        hit = s >= thr; leads = []
+        for k in range(n):
+            a, b = self.bounds[k], self.bounds[k + 1]
+            idx = np.flatnonzero(hit[a:b])
+            if not len(idx): continue
+            tt = self.t[a:b][idx]; al = []; last = -1e9
+            ai = []
+            for i, x in zip(idx, tt):
+                if x - last >= self.silence: al.append(x); ai.append(i); last = x
+            al = np.array(al); n_al[k] = len(al)
+            if mk is not None: n_am[k] = int(mk[a:b][np.array(ai, int)].sum())
+            on = self.onsets[k]
+            if len(on):
+                nxt = np.searchsorted(on, al, side="right"); ok = nxt < len(on)
+                n_true[k] = int(((on[nxt[ok]] - al[ok]) <= self.H).sum())
+            lo, hi = self.ev_lo[k], self.ev_hi[k]
+            if len(lo):
+                p = np.searchsorted(al, lo, side="left")
+                w = (p < len(al)) & (al[np.minimum(p, len(al) - 1)] <= hi)
+                n_w[k] = int(w.sum()); n_wn[k] = int((w & self.ev_new[k]).sum())
+                leads.extend((hi[w] + self.min_lead - al[p[w]]).tolist())
+        return dict(n_alarms=n_al, n_true=n_true, n_warned=n_w, n_warned_new=n_wn, n_alarms_mark=n_am, leads=leads)
+
+    def summarize(self, R, idx=None):
+        g = (lambda x: x) if idx is None else (lambda x: x[idx])
+        h = g(self.hours).sum(); ev = g(self.n_ev).sum(); nn = g(self.n_new).sum(); al = g(R["n_alarms"]).sum()
+        w = g(R["n_warned"]).sum(); wn = g(R["n_warned_new"]).sum()
+        return dict(alarms_per_hour=al / h if h else np.nan, sensitivity=w / ev if ev else np.nan,
+                    ppv_alarm=g(R["n_true"]).sum() / al if al else np.nan, n_events=int(ev), n_alarms=int(al), hours=float(h),
+                    n_events_new=int(nn), sensitivity_new=wn / nn if nn else np.nan,
+                    sensitivity_recurrent=(w - wn) / (ev - nn) if ev - nn > 0 else np.nan,
+                    **({} if not hasattr(self, "hours_mark") else self._mark_stats(R, g, al, h)))
+
+    def _mark_stats(self, R, g, al, h):
+        hm = g(self.hours_mark).sum(); am = g(R["n_alarms_mark"]).sum()
+        ra = am / hm if hm else np.nan; rb = (al - am) / (h - hm) if h - hm > 0 else np.nan
+        return dict(rate_mark=ra, rate_unmark=rb, hours_mark_share=hm / h if h else np.nan, ratio_unmark_to_mark=rb / ra if ra else np.inf)
+
+    def run(self, score, thr):
+        return self.summarize(self.per_stay(self.sorted_score(score), thr))
+
+    def threshold_for_burden(self, score, target, iters=30):
+        s = self.sorted_score(score)
+        lo, hi = min(np.nanmin(s), np.quantile(s, 0.5)), np.nanmax(s); best = None
+        for _ in range(iters):
+            mid = (lo + hi) / 2; R = self.per_stay(s, mid); r = self.summarize(R); best = (mid, r, R)
+            if r["alarms_per_hour"] > target: lo = mid
+            else: hi = mid
+        return best
