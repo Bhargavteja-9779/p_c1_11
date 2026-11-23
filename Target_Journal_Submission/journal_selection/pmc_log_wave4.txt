@@ -1,0 +1,1 @@
+{'journal': 'World Journal of Emergency Surgery', 'issn': '1749-7922', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 110, 'median': 98.5, 'p75': 151, 'p90': 254, 'max': 474, 'share_le72': 0.25}

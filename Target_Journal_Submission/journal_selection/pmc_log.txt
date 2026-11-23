@@ -1,0 +1,30 @@
+{'journal': 'Critical Care', 'issn': '1364-8535', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 929, 'median': 69.0, 'p75': 86, 'p90': 102, 'max': 153, 'share_le72': 0.6}
+{'journal': 'Journal of Intensive Care', 'issn': '2052-0492', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 157, 'median': 79.0, 'p75': 109, 'p90': 131, 'max': 297, 'share_le72': 0.42}
+{'journal': 'Annals of Intensive Care', 'issn': '2110-5820', 'publisher': 'Springer Nature', 'n': 60, 'pool': 317, 'median': 123.0, 'p75': 173, 'p90': 212, 'max': 351, 'share_le72': 0.12}
+{'journal': 'Cardiovascular Diabetology', 'issn': '1475-2840', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 569, 'median': 76.0, 'p75': 93, 'p90': 108, 'max': 160, 'share_le72': 0.48}
+{'journal': 'Journal of Hematology & Oncology', 'issn': '1756-8722', 'publisher': 'Springer Nature/BMC', 'n': 48, 'pool': 161, 'median': 91.0, 'p75': 107, 'p90': 143, 'max': 236, 'share_le72': 0.35}
+{'journal': 'npj Digital Medicine', 'issn': '2398-6352', 'publisher': 'Springer Nature', 'n': 60, 'pool': 1388, 'median': 146.0, 'p75': 206, 'p90': 279, 'max': 435, 'share_le72': 0.07}
+{'journal': 'Communications Medicine', 'issn': '2730-664X', 'publisher': 'Springer Nature', 'n': 60, 'pool': 934, 'median': 258.5, 'p75': 343, 'p90': 421, 'max': 995, 'share_le72': 0.0}
+{'journal': 'eClinicalMedicine', 'issn': '2589-5370', 'publisher': 'Elsevier (Lancet)', 'n': 60, 'pool': 962, 'median': 118.0, 'p75': 176, 'p90': 221, 'max': 296, 'share_le72': 0.08}
+{'journal': 'eBioMedicine', 'issn': '2352-3964', 'publisher': 'Elsevier (Lancet)', 'n': 60, 'pool': 748, 'median': 184.0, 'p75': 252, 'p90': 339, 'max': 619, 'share_le72': 0.02}
+{'journal': 'The Lancet Digital Health', 'issn': '2589-7500', 'publisher': 'Elsevier (Lancet)', 'n': 0, 'pool': 20}
+{'journal': 'JAMIA', 'issn': '1067-5027', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 347, 'median': 126.0, 'p75': 169, 'p90': 239, 'max': 382, 'share_le72': 0.07}
+{'journal': 'JAMIA Open', 'issn': '2574-2531', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 350, 'median': 116.5, 'p75': 228, 'p90': 307, 'max': 449, 'share_le72': 0.2}
+{'journal': 'Briefings in Bioinformatics', 'issn': '1467-5463', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 1149, 'median': 115.5, 'p75': 160, 'p90': 225, 'max': 431, 'share_le72': 0.15}
+{'journal': 'Bioinformatics', 'issn': '1367-4803', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 1279, 'median': 138.5, 'p75': 176, 'p90': 238, 'max': 353, 'share_le72': 0.12}
+{'journal': 'GigaScience', 'issn': '2047-217X', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 113, 'median': 199.0, 'p75': 264, 'p90': 328, 'max': 484, 'share_le72': 0.07}
+{'journal': 'Nucleic Acids Research', 'issn': '0305-1048', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 2178, 'median': 151.0, 'p75': 222, 'p90': 274, 'max': 459, 'share_le72': 0.25}
+{'journal': 'European Heart Journal - Digital Health', 'issn': '2634-3916', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 437, 'median': 138.0, 'p75': 170, 'p90': 204, 'max': 293, 'share_le72': 0.08}
+{'journal': 'Journal of Medical Internet Research', 'issn': '1438-8871', 'publisher': 'JMIR', 'n': 60, 'pool': 2294, 'median': 149.5, 'p75': 185, 'p90': 293, 'max': 438, 'share_le72': 0.1}
+{'journal': 'JMIR Medical Informatics', 'issn': '2291-9694', 'publisher': 'JMIR', 'n': 60, 'pool': 614, 'median': 191.0, 'p75': 252, 'p90': 313, 'max': 475, 'share_le72': 0.0}
+{'journal': 'BMJ Health & Care Informatics', 'issn': '2632-1009', 'publisher': 'BMJ', 'n': 60, 'pool': 181, 'median': 217.0, 'p75': 315, 'p90': 374, 'max': 481, 'share_le72': 0.03}
+{'journal': 'Journal of Biomedical Informatics', 'issn': '1532-0464', 'publisher': 'Elsevier', 'n': 0, 'pool': 46}
+{'journal': 'Intensive Care Medicine Experimental', 'issn': '2197-425X', 'publisher': 'Springer Nature', 'n': 60, 'pool': 230, 'median': 115.5, 'p75': 150, 'p90': 216, 'max': 416, 'share_le72': 0.2}
+{'journal': 'Journal of Translational Medicine', 'issn': '1479-5876', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 2276, 'median': 104.0, 'p75': 146, 'p90': 211, 'max': 401, 'share_le72': 0.18}
+{'journal': 'Clinical Kidney Journal', 'issn': '2048-8505', 'publisher': 'Oxford University Press', 'n': 60, 'pool': 604, 'median': 95.0, 'p75': 148, 'p90': 192, 'max': 249, 'share_le72': 0.27}
+{'journal': 'Diabetes Research and Clinical Practice', 'issn': '0168-8227', 'publisher': 'Elsevier', 'n': 1, 'pool': 30, 'median': 78, 'p75': 78, 'p90': 78, 'max': 78, 'share_le72': 0.0}
+{'journal': 'Journal of Cachexia Sarcopenia Muscle', 'issn': '2190-5991', 'publisher': 'Wiley', 'n': 60, 'pool': 442, 'median': 197.5, 'p75': 267, 'p90': 385, 'max': 686, 'share_le72': 0.03}
+{'journal': "Alzheimer's Research & Therapy", 'issn': '1758-9193', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 397, 'median': 119.5, 'p75': 188, 'p90': 251, 'max': 464, 'share_le72': 0.18}
+{'journal': 'Journal of Neuroinflammation', 'issn': '1742-2094', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 537, 'median': 102.0, 'p75': 137, 'p90': 167, 'max': 199, 'share_le72': 0.3}
+{'journal': 'Molecular Cancer', 'issn': '1476-4598', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 426, 'median': 137.0, 'p75': 177, 'p90': 231, 'max': 337, 'share_le72': 0.08}
+{'journal': 'Arthritis Research & Therapy', 'issn': '1478-6362', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 312, 'median': 122.5, 'p75': 174, 'p90': 254, 'max': 394, 'share_le72': 0.17}

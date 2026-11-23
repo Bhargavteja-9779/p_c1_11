@@ -1,0 +1,31 @@
+journal,issn,publisher,n,pool,median,p75,p90,max,share_le72
+Critical Care,1364-8535,Springer Nature/BMC,60,929,69.0,86,102,153,0.6
+Journal of Intensive Care,2052-0492,Springer Nature/BMC,60,157,79.0,109,131,297,0.42
+Annals of Intensive Care,2110-5820,Springer Nature,60,317,123.0,173,212,351,0.12
+Cardiovascular Diabetology,1475-2840,Springer Nature/BMC,60,569,76.0,93,108,160,0.48
+Journal of Hematology & Oncology,1756-8722,Springer Nature/BMC,48,161,91.0,107,143,236,0.35
+npj Digital Medicine,2398-6352,Springer Nature,60,1388,146.0,206,279,435,0.07
+Communications Medicine,2730-664X,Springer Nature,60,934,258.5,343,421,995,0.0
+eClinicalMedicine,2589-5370,Elsevier (Lancet),60,962,118.0,176,221,296,0.08
+eBioMedicine,2352-3964,Elsevier (Lancet),60,748,184.0,252,339,619,0.02
+The Lancet Digital Health,2589-7500,Elsevier (Lancet),0,20,,,,,
+JAMIA,1067-5027,Oxford University Press,60,347,126.0,169,239,382,0.07
+JAMIA Open,2574-2531,Oxford University Press,60,350,116.5,228,307,449,0.2
+Briefings in Bioinformatics,1467-5463,Oxford University Press,60,1149,115.5,160,225,431,0.15
+Bioinformatics,1367-4803,Oxford University Press,60,1279,138.5,176,238,353,0.12
+GigaScience,2047-217X,Oxford University Press,60,113,199.0,264,328,484,0.07
+Nucleic Acids Research,0305-1048,Oxford University Press,60,2178,151.0,222,274,459,0.25
+European Heart Journal - Digital Health,2634-3916,Oxford University Press,60,437,138.0,170,204,293,0.08
+Journal of Medical Internet Research,1438-8871,JMIR,60,2294,149.5,185,293,438,0.1
+JMIR Medical Informatics,2291-9694,JMIR,60,614,191.0,252,313,475,0.0
+BMJ Health & Care Informatics,2632-1009,BMJ,60,181,217.0,315,374,481,0.03
+Journal of Biomedical Informatics,1532-0464,Elsevier,0,46,,,,,
+Intensive Care Medicine Experimental,2197-425X,Springer Nature,60,230,115.5,150,216,416,0.2
+Journal of Translational Medicine,1479-5876,Springer Nature/BMC,60,2276,104.0,146,211,401,0.18
+Clinical Kidney Journal,2048-8505,Oxford University Press,60,604,95.0,148,192,249,0.27
+Diabetes Research and Clinical Practice,0168-8227,Elsevier,1,30,78,78,78,78,0.0
+Journal of Cachexia Sarcopenia Muscle,2190-5991,Wiley,60,442,197.5,267,385,686,0.03
+Alzheimer's Research & Therapy,1758-9193,Springer Nature/BMC,60,397,119.5,188,251,464,0.18
+Journal of Neuroinflammation,1742-2094,Springer Nature/BMC,60,537,102.0,137,167,199,0.3
+Molecular Cancer,1476-4598,Springer Nature/BMC,60,426,137.0,177,231,337,0.08
+Arthritis Research & Therapy,1478-6362,Springer Nature/BMC,60,312,122.5,174,254,394,0.17
