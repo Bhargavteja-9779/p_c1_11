@@ -37,3 +37,4 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 4. Then: GRU baseline (pip install torch cpu), full experiments (exp1..exp5 per protocol), figures, manuscript (Critical Care style), 11 reviews, docx, cover letter, risk report.
 
 - [2026-11-23] SESSION 2 started: deps reinstalled; downloads relaunched (MIMIC 32 workers ~500 rec/min; VitalDB; eICU demo done). metrics.py: faster _stay_alarms (identical output, verified) + AlarmSim (precomputed, stratum attribution, two-threshold label-free allocation, patient-level bootstrap). experiments/r4_label_free.py written (H-R4 stated in header). protocol_amendments.md A1 written.
+- [2026-11-23] USER DECLARATIONS for manuscript (manuscript/declarations.md): code available on request; no funding; no competing interests. Use verbatim.
