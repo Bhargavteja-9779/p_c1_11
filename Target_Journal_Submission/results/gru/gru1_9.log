@@ -55,3 +55,10 @@ seed 7 done 283 s
   gru ep5 val AUPRC 0.2276
 seed 8 done 273 s
   gru ep0 val AUPRC 0.1730
+  gru ep1 val AUPRC 0.1988
+  gru ep2 val AUPRC 0.2097
+  gru ep3 val AUPRC 0.2052
+  gru ep4 val AUPRC 0.2130
+  gru ep5 val AUPRC 0.2133
+seed 9 done 285 s
+GRU_EXIT 0
