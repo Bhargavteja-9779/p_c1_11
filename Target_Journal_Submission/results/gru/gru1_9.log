@@ -1,0 +1,57 @@
+  gru ep0 val AUPRC 0.1787
+  gru ep1 val AUPRC 0.2003
+  gru ep2 val AUPRC 0.2067
+  gru ep3 val AUPRC 0.2137
+  gru ep4 val AUPRC 0.2114
+  gru ep5 val AUPRC 0.2134
+seed 1 done 1104 s
+  gru ep0 val AUPRC 0.1819
+  gru ep1 val AUPRC 0.1996
+  gru ep2 val AUPRC 0.2151
+  gru ep3 val AUPRC 0.2144
+  gru ep4 val AUPRC 0.2185
+  gru ep5 val AUPRC 0.2214
+seed 2 done 270 s
+  gru ep0 val AUPRC 0.1815
+  gru ep1 val AUPRC 0.2068
+  gru ep2 val AUPRC 0.2173
+  gru ep3 val AUPRC 0.2180
+  gru ep4 val AUPRC 0.2227
+  gru ep5 val AUPRC 0.2233
+seed 3 done 282 s
+  gru ep0 val AUPRC 0.1904
+  gru ep1 val AUPRC 0.2111
+  gru ep2 val AUPRC 0.2148
+  gru ep3 val AUPRC 0.2183
+  gru ep4 val AUPRC 0.2187
+  gru ep5 val AUPRC 0.2153
+seed 4 done 305 s
+  gru ep0 val AUPRC 0.1916
+  gru ep1 val AUPRC 0.2098
+  gru ep2 val AUPRC 0.2209
+  gru ep3 val AUPRC 0.2220
+  gru ep4 val AUPRC 0.2246
+  gru ep5 val AUPRC 0.2261
+seed 5 done 309 s
+  gru ep0 val AUPRC 0.1842
+  gru ep1 val AUPRC 0.2065
+  gru ep2 val AUPRC 0.2135
+  gru ep3 val AUPRC 0.2187
+  gru ep4 val AUPRC 0.2242
+  gru ep5 val AUPRC 0.2226
+seed 6 done 291 s
+  gru ep0 val AUPRC 0.1847
+  gru ep1 val AUPRC 0.2080
+  gru ep2 val AUPRC 0.2182
+  gru ep3 val AUPRC 0.2190
+  gru ep4 val AUPRC 0.2210
+  gru ep5 val AUPRC 0.2240
+seed 7 done 283 s
+  gru ep0 val AUPRC 0.1906
+  gru ep1 val AUPRC 0.2150
+  gru ep2 val AUPRC 0.2201
+  gru ep3 val AUPRC 0.2258
+  gru ep4 val AUPRC 0.2313
+  gru ep5 val AUPRC 0.2276
+seed 8 done 273 s
+  gru ep0 val AUPRC 0.1730

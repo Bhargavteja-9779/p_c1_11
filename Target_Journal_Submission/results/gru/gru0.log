@@ -1,0 +1,8 @@
+  gru ep0 val AUPRC 0.1923
+  gru ep1 val AUPRC 0.2098
+  gru ep2 val AUPRC 0.2161
+  gru ep3 val AUPRC 0.2201
+  gru ep4 val AUPRC 0.2282
+  gru ep5 val AUPRC 0.2273
+seed 0 done 273 s
+GRU_EXIT 0

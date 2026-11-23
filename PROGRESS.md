@@ -37,14 +37,22 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 
 - [2026-11-23] SESSION 3: data rebuilt (identical counts). Novelty round 2 + novelty_scorecard.md written (recurrence bias known in dialysis/OR/sepsis/seizure -> do not claim discovery). R4 seeds 4-9 DONE; 10-seed summary in results/r4_all/ (logged in novelty_escalation_log.md). GBM<MAP new-onset: MIMIC 10/10 seeds, eICU 9/10, VitalDB 10/10. GRU seed 0 running (data_cache/logs/gru0.log).
 
-## NEXT ACTION (session 3 starts here — new account)
-0. New account must have GitHub access to Bhargavteja-9779/p_c1_11; check out the latest session branch (session 2: `claude/affectionate-galileo-agi7pp`), read this file.
-1. Rebuild data (data_cache is NOT in git):
-   - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx` and `pip install torch --index-url https://download.pytorch.org/whl/cpu`
-   - `python Target_Journal_Submission/code/src/data/download_mimic3wdb.py data_cache/mimic3wdb 32` (~50 min) ; `.../download_vitaldb.py data_cache/vitaldb 12` (~10 min) ; eICU demo curl (see DATA; patient.csv.gz may 502 -> retry)
-   - `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables` (~25 min) then `python scripts/build_sequences.py ../../data_cache/tables` (~20 min)
-2. Finish R4 seeds 4-9 (do NOT rerun 0-3; ~18 min/seed alone, slower if GRU runs in parallel):
-   `python experiments/r4_label_free.py ../../data_cache/tables ../results/r4_s4_9 --seeds=4,5,6,7,8,9` then concat results/r4/r4_seeds.csv + results/r4_s4_9/r4_seeds.csv and recompute mean±SD summary. Log outcome in novelty_escalation_log.md (Round 4 section exists).
-3. GRU (B5): `python experiments/train_gru.py ../../data_cache/tables 0,1,...,9` (scores -> data_cache/tables/scores/, NOT in git; ~? min/seed on 4 CPU, measure on seed 0 first; reduce to fewer seeds if too slow and document).
-4. Write journal_selection/novelty_scorecard.md (honest): core = N1 new-onset formulation + N7 shortcut finding (GBM < MAP for new-onset in 3 cohorts) + N2 state-aware policy (ICU) + N6 3-cohort validation; OR failure and first-passage = negative results.
-5. Freeze final candidate (state-aware SA-kappa or SA-delta, chosen on MIMIC val only), then run locked MIMIC test ONCE: r4 script with `--final` (adds MIMIC_test). Then full experiments exp1..exp5 per protocol + amendment A1, figures, manuscript (Critical Care style; declarations in manuscript/declarations.md), 11 reviews, docx, cover letter, risk report.
+- [2026-11-23] SESSION 3 (cont.): GRU seeds 0-8 trained (~4.5 min/seed alone; val AUPRC peak ~0.228 < GBM); logs in results/gru/. Scores are in data_cache (NOT git) -> retrain in session 4. Final candidate FROZEN before test: code/experiments/final_freeze.md (SA-kappa[newGBM] primary, SA-delta secondary, kappa/delta per seed read from R4 selection jsons). Final evaluation script written: code/experiments/exp_final.py (dry run uses MIMIC val; `--final` = locked test). First dry run OOM-killed (12.9 GB, GRU running in parallel) -> memory fix committed (float32, drop cols, free full table); fixed version NOT yet run. LOCKED MIMIC TEST STILL UNTOUCHED.
+
+## NEXT ACTION (session 4 starts here — new account)
+0. Check out branch `claude/upbeat-lamport-a7apim` (session 3; contains sessions 1-3). Read this file + code/experiments/final_freeze.md.
+1. Rebuild data (data_cache NOT in git), ~1.5 h total:
+   - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx` ; `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+   - eICU demo: curl physionet.org/files/eicu-crd-demo/2.0.1/{patient,vitalPeriodic,vitalAperiodic,infusiondrug,treatment,hospital}.csv.gz -> data_cache/eicu_demo
+   - `python Target_Journal_Submission/code/src/data/download_vitaldb.py data_cache/vitaldb 12` (~10 min, expect 3,724 ok)
+   - `python Target_Journal_Submission/code/src/data/download_mimic3wdb.py data_cache/mimic3wdb 32` (~45 min, expect ok 6247 / nomap 15999 / err 1)
+   - `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables && python scripts/build_sequences.py ../../data_cache/tables` (~5 min; expect MIMIC 5767 stays / 11,550,872 points)
+2. GRU: `python experiments/train_gru.py ../../data_cache/tables 0,1,2,3,4,5,6,7,8,9` (~45 min; run ALONE — parallel jobs OOM / slow down).
+3. Dry run (NOT test): `python experiments/exp_final.py ../../data_cache/tables ../../data_cache/dry_final --seeds=0` (run alone; ~20-30 min; check peak memory). Sanity: MIMIC_val @1/h for MAP/GBM/SA-kappa/SA-delta should be close to R4 seed 0 (MAP .706/.710/.705; GBM .761/.685/.781; SA-kappa .750/.753/.750; SA-delta .741/.769/.734). float32 may shift GBM slightly; if large differences, investigate before step 4.
+4. Locked test ONCE: `python experiments/exp_final.py ../../data_cache/tables ../results/final --final` (10 seeds, ~3-4 h?). Commit results/final/. Then Holm correction over the 3 primary comparisons x 3 cohorts (bootstrap_seed0.csv), write results summary.
+5. Remaining: Exp-1 selection-bias on full data, Exp-4 ablations, Exp-5 robustness (incl. new-onset window 2/4/12 h — note AlarmSim hard-codes 360 min), figures, manuscript (Critical Care style; declarations in manuscript/declarations.md; cite Kim 2026, Aubouin-Pairault 2026, Kamran 2024, seizure lead-seizure papers — see novelty_scorecard.md), 11 reviews, docx, cover letter, risk report.
+
+## Key results so far (dev; for writing)
+- 10-seed R4 summary: results/r4_all/r4_summary_0_9.csv; verdict in journal_selection/novelty_escalation_log.md (Round 4 final).
+- GBM - MAP new-onset @1/h: MIMIC val -2.1 (10/10 seeds neg), eICU -2.0 (9/10), VitalDB -6.1 (10/10).
+- SA-kappa vs GBM new-onset: +9.0 MIMIC val, +8.2 eICU, -11.6 VitalDB; pooled -2.4 / -1.1 / +0.7.
