@@ -5,9 +5,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.impute import SimpleImputer
 
-NON_FEATURES = {"t_idx", "t_min", "tto", "stay_id", "group_id", "cohort", "dt", "hospital", "split"}
+NON_FEATURES = {"t_idx", "t_min", "tto", "stay_id", "group_id", "cohort", "dt", "hospital", "split", "since_last", "stratumA"}
 def feature_cols(T):
-    return [c for c in T.columns if c not in NON_FEATURES and not c.startswith(("y", "obs", "score_", "fp_"))]
+    return [c for c in T.columns if c not in NON_FEATURES and not c.startswith(("y", "obs", "score_", "fp_", "seq_", "s_"))]
 
 def logit(p): p = np.clip(p, 1e-6, 1 - 1e-6); return np.log(p / (1 - p))
 def sigmoid(z): return 1 / (1 + np.exp(-z))

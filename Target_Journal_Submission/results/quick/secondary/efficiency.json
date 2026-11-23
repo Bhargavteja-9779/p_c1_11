@@ -1,0 +1,46 @@
+{
+ "GBM_0": {
+  "latency_us_per_prediction": 6.716048419527647,
+  "size": 12834,
+  "size_desc": "232 trees, 12834 nodes",
+  "fit_seconds": 2.6714227199554443
+ },
+ "GBM_A_0": {
+  "latency_us_per_prediction": 2.8990674031362147,
+  "size": 5242,
+  "size_desc": "170 trees, 5242 nodes",
+  "fit_seconds": 2.3140358924865723
+ },
+ "GBM_noHist_0": {
+  "latency_us_per_prediction": 4.89248176738737,
+  "size": 11964,
+  "size_desc": "212 trees, 11964 nodes",
+  "fit_seconds": 2.976550340652466
+ },
+ "LR_0": {
+  "latency_us_per_prediction": 0.8643163165269334,
+  "size": 46,
+  "size_desc": "46 coefficients",
+  "fit_seconds": 1.1516759395599365
+ },
+ "RF_0": {
+  "latency_us_per_prediction": 6.659025496649712,
+  "size": 73276,
+  "size_desc": "150 trees, 73276 nodes",
+  "fit_seconds": 16.955530166625977
+ },
+ "GRU_0": {
+  "latency_us_per_prediction": 9.181836626159209,
+  "size": 4257,
+  "size_desc": "4257 parameters",
+  "fit_seconds": 10.008267641067505
+ },
+ "FP": {
+  "latency_us_per_prediction": 0.1977861521440335,
+  "size": 4,
+  "size_desc": "4 fixed constants",
+  "fit_seconds": 0
+ },
+ "policy_delta_search_seconds_eICU": 0.18247461318969727,
+ "hardware": "4 vCPU, 15 GB RAM, no GPU"
+}

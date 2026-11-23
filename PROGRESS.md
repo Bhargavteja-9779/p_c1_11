@@ -39,10 +39,16 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 
 - [2026-11-23] SESSION 3 (cont.): GRU seeds 0-9 trained (~4.5 min/seed alone; val AUPRC peak ~0.228 < GBM); logs in results/gru/. Scores are in data_cache (NOT git) -> retrain in session 4. Final candidate FROZEN before test: code/experiments/final_freeze.md (SA-kappa[newGBM] primary, SA-delta secondary, kappa/delta per seed read from R4 selection jsons). Final evaluation script written: code/experiments/exp_final.py (dry run uses MIMIC val; `--final` = locked test). First dry run OOM-killed (12.9 GB, GRU running in parallel) -> memory fix committed (float32, drop cols, free full table); fixed version NOT yet run. LOCKED MIMIC TEST STILL UNTOUCHED.
 
+- [2026-11-23] SESSION 4 (branch `claude/vibrant-maxwell-6m6jo1`): MERGED the two divergent lines.
+  - Line A = `upbeat-lamport-a7apim` (sessions 1-3: R4, frozen SA-kappa candidate, exp_final.py, GRU). Line B = `tender-noether-szpr03` (RECHECK: journal re-verified KEEP Critical Care, prior-art map v2 91 rows incl. close call Kim 2026 Front Digit Health doi 10.3389/fdgth.2026.1804788, verified_references.csv 37 refs, problem_story.md, theory.md, unit tests, alternative pipeline run_all.py/src/policy.py/src/data/tables.py/src/evaluation/alarms.py).
+  - Conflict resolution: data pipeline kept from A (build_tables.py, features.py, cohorts.py) because the frozen candidate was selected on it and A's scripts read single `{cohort}_points.parquet`; B's sharded/censor-dropping/seq-column version NOT adopted (B's run_all.py expects that format -> not runnable as-is on A's tables; treat B's pipeline as reference). learned.py taken from B (only excludes since_last/stratumA, already excluded by A). protocol_amendments.md = A1 (governing) + B's v1.1 kept verbatim as parallel draft (secondary analyses only).
+  - B's tests (tests/test_core.py, 8) pass on merged code; needs `pip install numba`.
+  - Read RECHECK/PROGRESS.md and RECHECK/stage3/prior_art_report.md before writing the manuscript (novelty is PARTIAL; cite Kim 2026 and Wang 2026 medRxiv prominently).
+
 ## NEXT ACTION (session 4 starts here — new account)
 0. Check out branch `claude/upbeat-lamport-a7apim` (session 3; contains sessions 1-3). Read this file + code/experiments/final_freeze.md.
 1. Rebuild data (data_cache NOT in git), ~1.5 h total:
-   - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx` ; `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+   - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx numba` ; `pip install torch --index-url https://download.pytorch.org/whl/cpu`
    - eICU demo: curl physionet.org/files/eicu-crd-demo/2.0.1/{patient,vitalPeriodic,vitalAperiodic,infusiondrug,treatment,hospital}.csv.gz -> data_cache/eicu_demo
    - `python Target_Journal_Submission/code/src/data/download_vitaldb.py data_cache/vitaldb 12` (~10 min, expect 3,724 ok)
    - `python Target_Journal_Submission/code/src/data/download_mimic3wdb.py data_cache/mimic3wdb 32` (~45 min, expect ok 6247 / nomap 15999 / err 1)

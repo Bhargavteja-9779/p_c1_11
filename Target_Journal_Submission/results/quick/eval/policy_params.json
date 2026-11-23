@@ -1,0 +1,12 @@
+{
+ "0": {
+  "delta_val": 0.5,
+  "rho_val": 0.2695809594086806,
+  "delta_val_pooledGBM": 1.5
+ },
+ "1": {
+  "delta_val": 1.25,
+  "rho_val": 0.42547031906674104,
+  "delta_val_pooledGBM": 0.5
+ }
+}
