@@ -35,6 +35,8 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 
 - [2026-11-23] SESSION 3 started on branch `claude/upbeat-lamport-a7apim` (fast-forwarded from session-2 branch). Deps installed; eICU demo downloaded; VitalDB + MIMIC downloads running. Targeted prior-art search for new-onset/shortcut claims (novelty_map_round2.csv) launched.
 
+- [2026-11-23] SESSION 3: data rebuilt (identical counts). Novelty round 2 + novelty_scorecard.md written (recurrence bias known in dialysis/OR/sepsis/seizure -> do not claim discovery). R4 seeds 4-9 DONE; 10-seed summary in results/r4_all/ (logged in novelty_escalation_log.md). GBM<MAP new-onset: MIMIC 10/10 seeds, eICU 9/10, VitalDB 10/10. GRU seed 0 running (data_cache/logs/gru0.log).
+
 ## NEXT ACTION (session 3 starts here — new account)
 0. New account must have GitHub access to Bhargavteja-9779/p_c1_11; check out the latest session branch (session 2: `claude/affectionate-galileo-agi7pp`), read this file.
 1. Rebuild data (data_cache is NOT in git):

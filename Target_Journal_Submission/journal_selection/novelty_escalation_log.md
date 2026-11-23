@@ -54,3 +54,15 @@ Seed 0, first κ grid (0.25–8) — results/r4/stdout_grid1_seed0.txt. Pooled /
 | SA-delta[newGBM] (δ=1.0) | .741/.769/.734 | .833/.800/.843 | .471/.568/.455 |
 | SA-kappa[newGBM] (κ=0.25) | .750/.753/.750 | .837/.794/.849 | .516/**.282**/.556 |
 Observations: (1) full data reproduces the shortcut finding (GBM new-onset < MAP in all 3 cohorts). (2) κ hit the lower grid boundary → grid extended to 0.05–4 and run restarted (val-only decision; logged). (3) κ-transfer satisfies (a) in ICU (+6.8 / +7.2 pts new-onset; pooled −1.1 / −0.2) and (b) formally in VitalDB, but in the OR it destroys new-onset sensitivity (.282): fixing the per-hour intensity ratio starves stratum A when OR stratum-A risk is relatively higher. δ-transfer keeps the OR new-onset gain but costs pooled −3.8 pts. Neither rule transfers both goals to the OR → working conclusion: the policy is an ICU method; OR needs its own budget split (to be reported as a limitation / setting-specific result, not hidden).
+
+### Round 4 — final, 10 seeds (session 3, 2026-11-23) — results/r4_all/{r4_seeds_0_9.csv, r4_summary_0_9.csv}
+Seeds 0–3 from session 2, seeds 4–9 from session 3 (identical rebuilt data: MIMIC 5,767 stays / 11.55 M points). Mean ± SD over 10 seeds, 1 alarm/patient-hour, pooled / new-onset / recurrent sensitivity:
+| | MIMIC val | eICU | VitalDB |
+|---|---|---|---|
+| MAP | .706/.710/.705 | .787/.755/.796 | .488/.490/.487 |
+| GBM | .762±.001/.688±.004/.781±.002 | .845±.004/.735±.012/.877±.003 | .501±.007/.429±.013/.513±.008 |
+| SA-delta[newGBM] | .738±.011/.777±.017/.727±.018 | .834±.006/.815±.018/.840±.012 | .425±.038/.558±.037/.403±.048 |
+| SA-kappa[newGBM] | .738±.010/.778±.017/.728±.017 | .834±.006/.817±.016/.839±.011 | .507±.009/.313±.028/.541±.012 |
+Shortcut finding (GBM − MAP, new-onset): MIMIC val −2.1 pts (all 10 seeds negative, range −2.7 to −1.6); eICU −2.0 (9/10 negative, range −3.9 to +0.2; seed 8 ties); VitalDB −6.1 (all negative). → claim must be stated as seed-mean with bootstrap CI; eICU is the weakest cohort (515 new-onset events).
+H-R4 verdict: (a) MET — ICU new-onset gain over GBM: SA-kappa +9.0±1.8 (MIMIC val), +8.2±1.8 (eICU); pooled cost −2.4±1.0 / −1.1±0.8. (b) FORMALLY MET but substantively FAILED — VitalDB pooled +0.7±1.3 vs GBM, yet new-onset −11.6±2.7 (the opposite of the goal). SA-delta keeps OR new-onset (+12.9) but pooled −7.5±3.5. Conclusion unchanged: state-aware budget = ICU method; OR = reported limitation.
+Selected settings on MIMIC val across seeds: δ ∈ {1.0, 1.5}, κ ∈ {0.25, 0.35} (interior of extended grid).
