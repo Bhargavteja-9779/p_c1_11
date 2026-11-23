@@ -1,0 +1,31 @@
+{'journal': 'Critical Care', 'issn': '1364-8535', 'pmc_items': 290, 'n_research_with_dates': 104, 'median': 64.5, 'p25': 53.0, 'p75': 83.2, 'p90': 102.7, 'share_le72': 0.615, 'passes_rule': False}
+{'journal': 'Intensive Care Medicine', 'issn': '0342-4642', 'pmc_items': 22, 'n_research_with_dates': 6, 'median': 86.5, 'p25': 66.8, 'p75': 137.8, 'p90': 194.0, 'share_le72': 0.5, 'passes_rule': False}
+{'journal': 'Annals of Intensive Care', 'issn': '2110-5820', 'pmc_items': 107, 'n_research_with_dates': 64, 'median': 105.5, 'p25': 73.0, 'p75': 152.2, 'p90': 203.6, 'share_le72': 0.234, 'passes_rule': False}
+{'journal': 'Journal of Intensive Care', 'issn': '2052-0492', 'pmc_items': 71, 'n_research_with_dates': 50, 'median': 85.5, 'p25': 54.2, 'p75': 122.8, 'p90': 150.3, 'share_le72': 0.38, 'passes_rule': False}
+{'journal': 'British Journal of Anaesthesia', 'issn': '0007-0912', 'pmc_items': 15, 'n_research_with_dates': 6, 'median': 89.0, 'p25': 78.5, 'p75': 92.0, 'p90': 135.0, 'share_le72': 0.167, 'passes_rule': False}
+{'journal': 'Anaesthesia', 'issn': '0003-2409', 'pmc_items': 58, 'n_research_with_dates': 0}
+{'journal': 'Anesthesiology', 'issn': '0003-3022', 'pmc_items': 20, 'n_research_with_dates': 7, 'median': 168, 'p25': 149.5, 'p75': 294.0, 'p90': 375.8, 'share_le72': 0.0, 'passes_rule': False}
+{'journal': 'Critical Care Medicine', 'issn': '0090-3493', 'pmc_items': 24, 'n_research_with_dates': 0}
+{'journal': 'American J Respir Crit Care Med', 'issn': '1073-449X', 'pmc_items': 122, 'n_research_with_dates': 47, 'median': 182, 'p25': 130.0, 'p75': 228.5, 'p90': 263.0, 'share_le72': 0.106, 'passes_rule': False}
+{'journal': 'Chest', 'issn': '0012-3692', 'pmc_items': 19, 'n_research_with_dates': 0}
+{'journal': 'Journal of Clinical Monitoring and Computing', 'issn': '1387-1307', 'pmc_items': 27, 'n_research_with_dates': 17, 'median': 107, 'p25': 81.0, 'p75': 209.0, 'p90': 288.2, 'share_le72': 0.118, 'passes_rule': False}
+{'journal': 'BMC Anesthesiology', 'issn': '1471-2253', 'pmc_items': 279, 'n_research_with_dates': 219, 'median': 109, 'p25': 74.0, 'p75': 157.0, 'p90': 255.8, 'share_le72': 0.237, 'passes_rule': False}
+{'journal': 'Perioperative Medicine', 'issn': '2047-0525', 'pmc_items': 34, 'n_research_with_dates': 26, 'median': 177.0, 'p25': 126.2, 'p75': 274.2, 'p90': 369.5, 'share_le72': 0.0, 'passes_rule': False}
+{'journal': 'Resuscitation', 'issn': '0300-9572', 'pmc_items': 1, 'n_research_with_dates': 0}
+{'journal': 'Shock', 'issn': '1073-2322', 'pmc_items': 4, 'n_research_with_dates': 1, 'median': 41, 'p25': 41, 'p75': 41, 'p90': 41, 'share_le72': 1.0, 'passes_rule': True}
+{'journal': 'European Journal of Anaesthesiology', 'issn': '0265-0215', 'pmc_items': 2, 'n_research_with_dates': 0}
+{'journal': 'Anesthesia and Analgesia', 'issn': '0003-2999', 'pmc_items': 9, 'n_research_with_dates': 4, 'median': 150.0, 'p25': 108.2, 'p75': 172.0, 'p90': 179.2, 'share_le72': 0.25, 'passes_rule': False}
+{'journal': 'Critical Care Explorations', 'issn': '2639-8028', 'pmc_items': 101, 'n_research_with_dates': 0}
+{'journal': 'Journal of Critical Care', 'issn': '0883-9441', 'pmc_items': 2, 'n_research_with_dates': 0}
+{'journal': 'Intensive Care Med Experimental', 'issn': '2197-425X', 'pmc_items': 83, 'n_research_with_dates': 60, 'median': 119.5, 'p25': 82.5, 'p75': 159.2, 'p90': 210.1, 'share_le72': 0.133, 'passes_rule': False}
+{'journal': 'Canadian Journal of Anesthesia', 'issn': '0832-610X', 'pmc_items': 16, 'n_research_with_dates': 14, 'median': 145.0, 'p25': 91.2, 'p75': 207.2, 'p90': 274.7, 'share_le72': 0.214, 'passes_rule': False}
+{'journal': 'npj Digital Medicine', 'issn': '2398-6352', 'pmc_items': 342, 'n_research_with_dates': 268, 'median': 195.0, 'p25': 138.2, 'p75': 267.2, 'p90': 327.0, 'share_le72': 0.026, 'passes_rule': False}
+{'journal': 'Journal of Headache and Pain', 'issn': '1129-2369', 'pmc_items': 101, 'n_research_with_dates': 83, 'median': 47, 'p25': 38.0, 'p75': 76.0, 'p90': 115.6, 'share_le72': 0.723, 'passes_rule': False}
+{'journal': 'Cardiovascular Diabetology', 'issn': '1475-2840', 'pmc_items': 144, 'n_research_with_dates': 126, 'median': 64.0, 'p25': 48.0, 'p75': 84.0, 'p90': 111.0, 'share_le72': 0.643, 'passes_rule': False}
+{'journal': 'Military Medical Research', 'issn': '2054-9369', 'pmc_items': 39, 'n_research_with_dates': 11, 'median': 326, 'p25': 304.0, 'p75': 419.0, 'p90': 436.0, 'share_le72': 0.0, 'passes_rule': False}
+{'journal': 'Respiratory Research', 'issn': '1465-993X', 'pmc_items': 161, 'n_research_with_dates': 142, 'median': 122.5, 'p25': 93.5, 'p75': 179.2, 'p90': 213.0, 'share_le72': 0.12, 'passes_rule': False}
+{'journal': 'Journal of Neuroinflammation', 'issn': '1742-2094', 'pmc_items': 137, 'n_research_with_dates': 106, 'median': 113.0, 'p25': 83.0, 'p75': 160.5, 'p90': 206.5, 'share_le72': 0.179, 'passes_rule': False}
+{'journal': 'World Journal of Emergency Surgery', 'issn': '1749-7922', 'pmc_items': 24, 'n_research_with_dates': 16, 'median': 114.0, 'p25': 85.8, 'p75': 141.2, 'p90': 221.5, 'share_le72': 0.188, 'passes_rule': False}
+{'journal': 'Scand J Trauma Resusc Emerg Med', 'issn': '1757-7241', 'pmc_items': 70, 'n_research_with_dates': 43, 'median': 101, 'p25': 71.0, 'p75': 132.0, 'p90': 221.4, 'share_le72': 0.279, 'passes_rule': False}
+{'journal': 'Burns & Trauma', 'issn': '2321-3868', 'pmc_items': 26, 'n_research_with_dates': 14, 'median': 193.0, 'p25': 167.5, 'p75': 200.8, 'p90': 244.4, 'share_le72': 0.143, 'passes_rule': False}
+{'journal': 'Annals of Emergency Medicine', 'issn': '0196-0644', 'pmc_items': 6, 'n_research_with_dates': 0}

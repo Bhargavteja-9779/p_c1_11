@@ -1,0 +1,32 @@
+journal,issn,pmc_items,n_research_with_dates,median,p25,p75,p90,share_le72,passes_rule
+Critical Care,1364-8535,290,104,64.5,53.0,83.2,102.7,0.615,False
+Intensive Care Medicine,0342-4642,22,6,86.5,66.8,137.8,194.0,0.5,False
+Annals of Intensive Care,2110-5820,107,64,105.5,73.0,152.2,203.6,0.234,False
+Journal of Intensive Care,2052-0492,71,50,85.5,54.2,122.8,150.3,0.38,False
+British Journal of Anaesthesia,0007-0912,15,6,89.0,78.5,92.0,135.0,0.167,False
+Anaesthesia,0003-2409,58,0,,,,,,
+Anesthesiology,0003-3022,20,7,168,149.5,294.0,375.8,0.0,False
+Critical Care Medicine,0090-3493,24,0,,,,,,
+American J Respir Crit Care Med,1073-449X,122,47,182,130.0,228.5,263.0,0.106,False
+Chest,0012-3692,19,0,,,,,,
+Journal of Clinical Monitoring and Computing,1387-1307,27,17,107,81.0,209.0,288.2,0.118,False
+BMC Anesthesiology,1471-2253,279,219,109,74.0,157.0,255.8,0.237,False
+Perioperative Medicine,2047-0525,34,26,177.0,126.2,274.2,369.5,0.0,False
+Resuscitation,0300-9572,1,0,,,,,,
+Shock,1073-2322,4,1,41,41,41,41,1.0,True
+European Journal of Anaesthesiology,0265-0215,2,0,,,,,,
+Anesthesia and Analgesia,0003-2999,9,4,150.0,108.2,172.0,179.2,0.25,False
+Critical Care Explorations,2639-8028,101,0,,,,,,
+Journal of Critical Care,0883-9441,2,0,,,,,,
+Intensive Care Med Experimental,2197-425X,83,60,119.5,82.5,159.2,210.1,0.133,False
+Canadian Journal of Anesthesia,0832-610X,16,14,145.0,91.2,207.2,274.7,0.214,False
+npj Digital Medicine,2398-6352,342,268,195.0,138.2,267.2,327.0,0.026,False
+Journal of Headache and Pain,1129-2369,101,83,47,38.0,76.0,115.6,0.723,False
+Cardiovascular Diabetology,1475-2840,144,126,64.0,48.0,84.0,111.0,0.643,False
+Military Medical Research,2054-9369,39,11,326,304.0,419.0,436.0,0.0,False
+Respiratory Research,1465-993X,161,142,122.5,93.5,179.2,213.0,0.12,False
+Journal of Neuroinflammation,1742-2094,137,106,113.0,83.0,160.5,206.5,0.179,False
+World Journal of Emergency Surgery,1749-7922,24,16,114.0,85.8,141.2,221.5,0.188,False
+Scand J Trauma Resusc Emerg Med,1757-7241,70,43,101,71.0,132.0,221.4,0.279,False
+Burns & Trauma,2321-3868,26,14,193.0,167.5,200.8,244.4,0.143,False
+Annals of Emergency Medicine,0196-0644,6,0,,,,,,
