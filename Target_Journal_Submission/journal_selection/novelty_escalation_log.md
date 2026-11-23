@@ -42,3 +42,15 @@ At 1 alarm/patient-hour, pooled / new-onset / recurrent sensitivity:
 | StateAware[MAP + GBM] | .725/.692/.734 | .811/.823/.808 | .497/.452/.505 |
 H-R3: PARTLY CONFIRMED in ICU cohorts. New-onset sensitivity +11.7 pts (MIMIC val) and +9.9 pts (eICU) over GBM, but pooled sensitivity falls 3.6 / 1.4 pts (MIMIC criterion "≤2 pts" FAILED, eICU met). In the OR (VitalDB) the budget split chosen in ICU does not transfer (pooled drops to .326): stratum prevalence differs in surgery. Not yet "remarkable"; δ is setting-specific.
 Next ideas for Round 4: (a) choose δ per setting from UNLABELLED stratum time fractions (label-free re-balancing); (b) multi-objective reporting (Pareto curve new vs recurrent at fixed burden); (c) confirm on full MIMIC + locked test + bootstrap CIs; (d) seeds.
+
+## Round 4 — label-free transfer (κ = ratio of alarm intensities per stratum-hour) — FULL data (2026-11-23)
+Data now: MIMIC full download (22,247 records scanned; 6,247 with invasive MAP; 1 record persistently failing download, excluded) → 5,767 stays / 11.55 M prediction points (val 1,035 stays, 2.29 M obs15 points); eICU demo 408 stays; VitalDB 3,411 cases. Locked MIMIC test still untouched.
+H-R4 (in script header, written before testing): κ chosen on MIMIC val, thresholds re-set label-free per cohort → (a) ICU new-onset gain ≥5 pts over GBM at 1 alarm/h; (b) VitalDB pooled within 2 pts of GBM.
+Seed 0, first κ grid (0.25–8) — results/r4/stdout_grid1_seed0.txt. Pooled / new-onset / recurrent at 1 alarm/h:
+| | MIMIC val | eICU | VitalDB |
+|---|---|---|---|
+| MAP | .706/.710/.705 | .787/.755/.796 | .488/.490/.487 |
+| GBM | .761/.685/.781 | .839/.722/.873 | .509/.432/.523 |
+| SA-delta[newGBM] (δ=1.0) | .741/.769/.734 | .833/.800/.843 | .471/.568/.455 |
+| SA-kappa[newGBM] (κ=0.25) | .750/.753/.750 | .837/.794/.849 | .516/**.282**/.556 |
+Observations: (1) full data reproduces the shortcut finding (GBM new-onset < MAP in all 3 cohorts). (2) κ hit the lower grid boundary → grid extended to 0.05–4 and run restarted (val-only decision; logged). (3) κ-transfer satisfies (a) in ICU (+6.8 / +7.2 pts new-onset; pooled −1.1 / −0.2) and (b) formally in VitalDB, but in the OR it destroys new-onset sensitivity (.282): fixing the per-hour intensity ratio starves stratum A when OR stratum-A risk is relatively higher. δ-transfer keeps the OR new-onset gain but costs pooled −3.8 pts. Neither rule transfers both goals to the OR → working conclusion: the policy is an ICU method; OR needs its own budget split (to be reported as a limitation / setting-specific result, not hidden).
