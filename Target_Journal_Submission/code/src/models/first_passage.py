@@ -42,3 +42,40 @@ class FirstPassage:
         return fp_probability(m0 - self.barrier, mu, sg, H)
     def get_params(self):
         return dict(W=self.W, vol=self.vol, kappa=self.kappa, lam=self.lam, sigma_floor=self.sigma_floor, level=self.level)
+
+
+class OUFirstPassage:
+    """Mean-reverting (Ornstein-Uhlenbeck) first passage, training-free.
+    dX = theta*(c - X) ds + sigma dW, X(0)=m0. c = patient's recent set-point (rolling mean over `setpoint` minutes).
+    P(min_{s<=H} X(s) <= b) computed by exact OU discretisation on dt-minute steps with Brownian-bridge crossing
+    correction inside each step, using common random numbers (deterministic)."""
+    def __init__(self, theta=0.05, setpoint="map_mean_60", vol="diff_sd_30", kappa=1.0, sigma_floor=0.5, level="map_now",
+                 n_paths=400, barrier=65.0, seed=12345):
+        self.theta, self.setpoint, self.vol, self.kappa, self.sigma_floor, self.level = theta, setpoint, vol, kappa, sigma_floor, level
+        self.n_paths, self.barrier, self.seed = n_paths, barrier, seed
+    def get_params(self):
+        return dict(theta=self.theta, setpoint=self.setpoint, vol=self.vol, kappa=self.kappa, level=self.level)
+    def predict_proba(self, F, H, dt=1.0, chunk=20000):
+        m0 = F[self.level].to_numpy(float) if self.level in F else F["map_now"].to_numpy(float)
+        m0 = np.where(np.isfinite(m0), m0, F["map_now"].to_numpy(float))
+        c = F[self.setpoint].to_numpy(float); c = np.where(np.isfinite(c), c, m0)
+        sg = F[f"map_{self.vol}"].to_numpy(float) if self.vol != "resid" else F["map_resid_sd_20"].to_numpy(float)
+        sg = np.where(np.isfinite(sg), sg, np.nanmedian(sg)); sg = np.maximum(self.kappa * sg, self.sigma_floor)
+        steps = int(round(H / dt)); th = self.theta * dt
+        a = np.exp(-th); sd_step = np.sqrt((1 - np.exp(-2 * th)) / (2 * self.theta)) if self.theta > 0 else np.sqrt(dt)
+        rng = np.random.default_rng(self.seed)
+        Z = rng.standard_normal((self.n_paths // 2, steps)); Z = np.concatenate([Z, -Z])   # antithetic
+        U = rng.random((self.n_paths, steps))
+        out = np.empty(len(m0)); b = self.barrier
+        for i in range(0, len(m0), chunk):
+            x = np.repeat(m0[i:i+chunk, None], self.n_paths, 1); cc = c[i:i+chunk, None]; s = sg[i:i+chunk, None]
+            alive = x > b
+            for k in range(steps):
+                xn = cc + (x - cc) * a + s * sd_step * Z[None, :, k]
+                # bridge crossing probability within the step for paths above barrier at both ends
+                with np.errstate(over="ignore", invalid="ignore"):
+                    pc = np.exp(-2 * np.maximum(x - b, 0) * np.maximum(xn - b, 0) / (s ** 2 * dt))
+                alive &= (xn > b) & (U[None, :, k] >= pc)
+                x = xn
+            out[i:i+chunk] = 1 - alive.mean(1)
+        return out

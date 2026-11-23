@@ -1,0 +1,24 @@
+map_min_15          0.190
+map_min_5           0.145
+frac_below65_360    0.081
+map_min_30          0.072
+map_min_60          0.063
+map_now             0.044
+resp_mean_30        0.026
+spo2_mean_30        0.021
+map_resid_sd_60     0.019
+hr_mean_30          0.019
+map_diff_sd_60      0.018
+map_slope_10        0.015
+map_mean_60         0.014
+spo2_slope_20       0.013
+sbp_mean_30         0.013
+dtype: float64
+map_now {'auroc': 0.842, 'auprc': 0.198}
+map_now+min15 {'auroc': 0.867, 'auprc': 0.206}
+map_now+frac65_360 {'auroc': 0.873, 'auprc': 0.216}
+map_now+min15+frac65 {'auroc': 0.883, 'auprc': 0.225}
+top5 {'auroc': 0.884, 'auprc': 0.213}
+no_history(frac65_360) {'auroc': 0.891, 'auprc': 0.24}
+no event in prior 6h 107739 0.0074 GBM {'auroc': 0.929, 'auprc': 0.148} MAP {'auroc': 0.898, 'auprc': 0.127}
+event in prior 6h 92261 0.0627 GBM {'auroc': 0.827, 'auprc': 0.264} MAP {'auroc': 0.764, 'auprc': 0.203}
