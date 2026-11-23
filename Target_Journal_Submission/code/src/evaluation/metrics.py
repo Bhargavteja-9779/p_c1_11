@@ -40,15 +40,18 @@ def alarm_simulation(df, score_col, thr, stays, H=C.PRIMARY_H, min_lead=C.MIN_LE
         al = _stay_alarms(t, s, thr, silence)
         info = stays[sid]; onsets = np.array(info["onsets_min"], float)
         tset = t  # eligible times
-        n_ev = 0; n_warn = 0; leads = []; useful = np.zeros(len(al), bool)
-        for o in onsets:
+        n_ev = 0; n_warn = 0; leads = []; useful = np.zeros(len(al), bool); n_new = 0; n_warn_new = 0
+        t_first = tset.min() if len(tset) else np.inf
+        for j, o in enumerate(onsets):
             # event is "evaluable" if there is an eligible time in the warning window
             lo, hi = o - H, o - min_lead
             if not ((tset >= lo) & (tset <= hi)).any(): continue
             n_ev += 1
             w = (al >= lo) & (al <= hi)
+            is_new = (not ((onsets[:j] >= o - 360) & (onsets[:j] < o)).any()) and (t_first <= o - 60)
+            n_new += int(is_new)
             if w.any():
-                n_warn += 1; leads.append(o - al[w].min()); useful |= w
+                n_warn += 1; leads.append(o - al[w].min()); useful |= w; n_warn_new += int(is_new)
         # alarms followed by an event within H (true alarms)
         if len(al) and len(onsets):
             nxt = np.searchsorted(onsets, al, side="right")
@@ -56,7 +59,7 @@ def alarm_simulation(df, score_col, thr, stays, H=C.PRIMARY_H, min_lead=C.MIN_LE
             true_al = np.zeros(len(al), bool); true_al[ok] = (onsets[nxt[ok]] - al[ok]) <= H
         else: true_al = np.zeros(len(al), bool)
         rows.append(dict(stay_id=sid, group_id=info["group_id"], hours=len(t) * info["dt"] / 60.0, n_alarms=len(al),
-                         n_true_alarms=int(true_al.sum()), n_events=n_ev, n_warned=n_warn, lead_sum=float(np.sum(leads)), leads=leads))
+                         n_true_alarms=int(true_al.sum()), n_events=n_ev, n_warned=n_warn, n_events_new=n_new, n_warned_new=n_warn_new, lead_sum=float(np.sum(leads)), leads=leads))
     R = pd.DataFrame(rows)
     return R
 
@@ -65,7 +68,10 @@ def summarize_alarms(R):
     leads = np.concatenate([np.array(x, float) for x in R.leads]) if len(R) else np.array([])
     return dict(alarms_per_hour=float(al / h) if h else np.nan, sensitivity=float(R.n_warned.sum() / ev) if ev else np.nan,
                 ppv_alarm=float(R.n_true_alarms.sum() / al) if al else np.nan, n_events=int(ev), n_alarms=int(al), hours=float(h),
-                median_lead=float(np.median(leads)) if len(leads) else np.nan)
+                median_lead=float(np.median(leads)) if len(leads) else np.nan,
+                n_events_new=int(R.n_events_new.sum()) if "n_events_new" in R else 0,
+                sensitivity_new=float(R.n_warned_new.sum() / R.n_events_new.sum()) if "n_events_new" in R and R.n_events_new.sum() else np.nan,
+                sensitivity_recurrent=float((R.n_warned.sum() - R.n_warned_new.sum()) / (ev - R.n_events_new.sum())) if "n_events_new" in R and ev - R.n_events_new.sum() > 0 else np.nan)
 
 def threshold_for_burden(df, score_col, stays, target, H=C.PRIMARY_H, iters=22):
     """Bisection on threshold so that alarms per eligible patient-hour ~= target."""
