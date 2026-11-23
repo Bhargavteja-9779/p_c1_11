@@ -1,1 +1,17 @@
 {'journal': 'World Journal of Emergency Surgery', 'issn': '1749-7922', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 110, 'median': 98.5, 'p75': 151, 'p90': 254, 'max': 474, 'share_le72': 0.25}
+{'journal': 'Scand J Trauma Resusc Emerg Med', 'issn': '1757-7241', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 284, 'median': 101.5, 'p75': 157, 'p90': 203, 'max': 356, 'share_le72': 0.33}
+{'journal': 'Journal of Headache and Pain', 'issn': '1129-2369', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 424, 'median': 60.5, 'p75': 85, 'p90': 112, 'max': 195, 'share_le72': 0.6}
+{'journal': 'Diabetology & Metabolic Syndrome', 'issn': '1758-5996', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 541, 'median': 106.0, 'p75': 195, 'p90': 306, 'max': 575, 'share_le72': 0.32}
+{'journal': 'Burns & Trauma', 'issn': '2321-3868', 'publisher': 'Oxford University Press', 'n': 55, 'pool': 105, 'median': 170, 'p75': 202, 'p90': 268, 'max': 392, 'share_le72': 0.13}
+{'journal': 'Journal of Biomedical Science', 'issn': '1423-0127', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 150, 'median': 150.5, 'p75': 181, 'p90': 231, 'max': 369, 'share_le72': 0.08}
+{'journal': 'Journal of Nanobiotechnology', 'issn': '1477-3155', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 1505, 'median': 104.0, 'p75': 130, 'p90': 180, 'max': 215, 'share_le72': 0.25}
+{'journal': 'Emerging Microbes & Infections', 'issn': '2222-1751', 'publisher': 'Taylor & Francis', 'n': 0, 'pool': 383}
+{'journal': 'Journal of Experimental & Clinical Cancer Research', 'issn': '1756-9966', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 406, 'median': 118.5, 'p75': 151, 'p90': 179, 'max': 292, 'share_le72': 0.12}
+{'journal': 'Clinical Epigenetics', 'issn': '1868-7083', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 336, 'median': 143.5, 'p75': 218, 'p90': 308, 'max': 516, 'share_le72': 0.1}
+{'journal': 'Lipids in Health and Disease', 'issn': '1476-511X', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 430, 'median': 78.5, 'p75': 126, 'p90': 164, 'max': 253, 'share_le72': 0.43}
+{'journal': 'Journal of Inflammation Research', 'issn': '1178-7031', 'publisher': 'Dove/Taylor & Francis', 'n': 60, 'pool': 1490, 'median': 118.0, 'p75': 149, 'p90': 175, 'max': 254, 'share_le72': 0.07}
+{'journal': 'Annals of Medicine', 'issn': '0785-3890', 'publisher': 'Taylor & Francis', 'n': 0, 'pool': 1513}
+{'journal': 'Renal Failure', 'issn': '0886-022X', 'publisher': 'Taylor & Francis', 'n': 0, 'pool': 762}
+{'journal': 'International Journal of Surgery', 'issn': '1743-9191', 'publisher': 'Wolters Kluwer', 'n': 60, 'pool': 1305, 'median': 26.5, 'p75': 116, 'p90': 166, 'max': 308, 'share_le72': 0.62}
+{'journal': 'Intensive Care Medicine', 'issn': '0342-4642', 'publisher': 'Springer Nature', 'n': 36, 'pool': 121, 'median': 95.5, 'p75': 115, 'p90': 143, 'max': 239, 'share_le72': 0.36}
+{'journal': 'Critical Care (repeat, other seed)', 'issn': '1364-8535', 'publisher': 'Springer Nature/BMC', 'n': 60, 'pool': 929, 'median': 62.0, 'p75': 88, 'p90': 116, 'max': 179, 'share_le72': 0.63}
