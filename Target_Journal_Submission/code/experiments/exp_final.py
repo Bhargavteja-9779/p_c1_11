@@ -39,17 +39,21 @@ def add_since_last(D, stays):
     D["since_last"] = out; D["stratumA"] = D["since_last"] > 360
     return D
 
+DROP = ["y5", "obs5", "y10", "obs10", "y30", "obs30", "tto", "t_idx", "cohort", "hospital"]
 def load(co):
     full = pd.read_parquet(f"{TAB}/{co}_points.parquet"); keep = np.flatnonzero(full.obs15.to_numpy())
-    D = full.iloc[keep].reset_index(drop=True); D["row"] = keep; del full
+    D = full.iloc[keep].drop(columns=[c for c in DROP if c in full.columns]).reset_index(drop=True); D["row"] = keep; del full
+    for c in D.columns:
+        if D[c].dtype == "float64" and c != "t_min": D[c] = D[c].astype("float32")
     stays = {s["stay_id"]: s for s in json.load(open(f"{TAB}/{co}_stays.json")) if "error" not in s}
     return add_since_last(D, stays), stays
 
 t0 = time.time(); Pm, Sm = load("MIMIC")
 fc = [c for c in feature_cols(Pm) if c not in ("since_last", "stratumA", "row")]
-tr = Pm[Pm.split == "train"]
+tr = Pm.loc[Pm.split == "train", fc + ["y15", "stratumA"]].reset_index(drop=True)
 internal = "MIMIC_test" if FINAL else "MIMIC_val"
 cohorts = {internal: (Pm[Pm.split == ("test" if FINAL else "val")].reset_index(drop=True), Sm)}
+del Pm; import gc; gc.collect()
 for co in ("eICU", "VitalDB"): cohorts[co] = load(co)
 src_of = {internal: "MIMIC", "eICU": "eICU", "VitalDB": "VitalDB"}
 P("loaded", {k: (len(v[0]), v[0].stay_id.nunique(), round(float(v[0].y15.mean()), 4)) for k, v in cohorts.items()}, round(time.time() - t0), "s")
