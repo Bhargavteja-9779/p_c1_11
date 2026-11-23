@@ -31,3 +31,14 @@ Sensitivity (warned ≥5 min ahead) at 1 alarm/patient-hour — pooled / new-ons
 H-R2 CONFIRMED for the trained model: GBM's pooled gain comes from recurrent episodes; for new-onset episodes it is WORSE than current MAP in all 3 cohorts at 0.5 and 1 alarm/h. FP ≈ MAP on new-onset (better than MAP at 0.5/h in MIMIC and eICU).
 Interpretation: trained models learn a "recent-hypotension" shortcut and spend the alarm budget on patients already known to be hypotensive. The clinically most important episodes (first deterioration) are under-served. This is a new finding (N7) + a new problem formulation (N1: state-aware warning with separate budgets).
 Next hypothesis (Round 3, written before testing): H-R3 — A state-aware policy (stratum A = no hypotension in prior 6 h, scored by a model trained only on new-onset-eligible time points; stratum B = recent hypotension, scored by GBM) with the alarm budget split between strata to maximise the mean of new-onset and recurrent sensitivity (split chosen on validation) will raise new-onset sensitivity by ≥5 points over GBM at equal total burden without lowering pooled sensitivity by more than 2 points. Falsified otherwise.
+
+## Round 3 — state-aware policy (2026-11-23) — results/escalation/r3_state_aware.csv (delta chosen on MIMIC val)
+At 1 alarm/patient-hour, pooled / new-onset / recurrent sensitivity:
+| | MIMIC val | eICU | VitalDB (OR) |
+|---|---|---|---|
+| MAP | .682/.678/.684 | .816/.786/.825 | .493/.494/.492 |
+| GBM | .741/.625/.770 | .844/.718/.881 | .481/.436/.489 |
+| StateAware[new-onset GBM + GBM] | .705/**.742**/.696 | .830/**.817**/.834 | .326/.548/.288 |
+| StateAware[MAP + GBM] | .725/.692/.734 | .811/.823/.808 | .497/.452/.505 |
+H-R3: PARTLY CONFIRMED in ICU cohorts. New-onset sensitivity +11.7 pts (MIMIC val) and +9.9 pts (eICU) over GBM, but pooled sensitivity falls 3.6 / 1.4 pts (MIMIC criterion "≤2 pts" FAILED, eICU met). In the OR (VitalDB) the budget split chosen in ICU does not transfer (pooled drops to .326): stratum prevalence differs in surgery. Not yet "remarkable"; δ is setting-specific.
+Next ideas for Round 4: (a) choose δ per setting from UNLABELLED stratum time fractions (label-free re-balancing); (b) multi-objective reporting (Pareto curve new vs recurrent at fixed burden); (c) confirm on full MIMIC + locked test + bootstrap CIs; (d) seeds.

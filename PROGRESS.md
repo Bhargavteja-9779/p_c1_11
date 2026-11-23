@@ -26,6 +26,12 @@ Resume rule: read this file, continue from "NEXT ACTION". Every phase is committ
 - Tables: `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables` (dev tables used so far: data_cache/tables_dev built from partial MIMIC, 1,267 stays).
 - pip: lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx (torch cpu optional for GRU).
 
-## NEXT ACTION
-- D6 Round 2: test H-R2 (new-onset vs recurrent hypotension) with experiments/r2_new_onset.py on dev tables (MIMIC val + externals). If confirmed -> candidate core contribution = new problem formulation (new-onset warnings) + evaluation finding + method targeted at new-onset (e.g., FP/hazard model w/o history shortcut). Then write novelty_scorecard.md.
-- When MIMIC download finishes: rebuild full tables, rerun all with locked test.
+- [2026-11-23] D6 Round 2: KEY FINDING — GBM gains come from recurrent episodes; for NEW-ONSET hypotension GBM is worse than current MAP in all 3 cohorts (results/escalation/r2_new_onset.csv).
+- [2026-11-23] D6 Round 3: state-aware policy (new-onset model in no-recent-event stratum + GBM elsewhere, offset delta tuned on val) gives +10-12 pts new-onset sensitivity in ICU cohorts, small pooled loss; fails to transfer to OR (VitalDB). See novelty_escalation_log.md.
+- MIMIC download was at ~15k/22k records when session 1 ended (resumable; skips cached).
+
+## NEXT ACTION (session 2 starts here)
+1. Re-download data (see DATA section; MIMIC resumable ~2-4 h) and build full tables: `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables`.
+2. D6 Round 4: label-free delta adaptation per setting (from unlabelled stratum time share), Pareto curves, 10 seeds, patient-level bootstrap CIs; MIMIC locked test touched once per final candidate. Scripts to reuse: experiments/r2_new_onset.py, r3_state_aware.py, src/evaluation/metrics.py (alarm_simulation has new-onset/recurrent split).
+3. Write novelty_scorecard.md (honest; current candidate core: N1 new-onset formulation + N7 shortcut finding + N6 3-cohort validation + N2 state-aware policy; first-passage = secondary/negative result).
+4. Then: GRU baseline (pip install torch cpu), full experiments (exp1..exp5 per protocol), figures, manuscript (Critical Care style), 11 reviews, docx, cover letter, risk report.
