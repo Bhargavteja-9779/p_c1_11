@@ -30,11 +30,17 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 - [2026-11-23] D6 Round 3: state-aware policy (new-onset model in no-recent-event stratum + GBM elsewhere, offset delta tuned on val) gives +10-12 pts new-onset sensitivity in ICU cohorts, small pooled loss; fails to transfer to OR (VitalDB). See novelty_escalation_log.md.
 - MIMIC download was at ~15k/22k records when session 1 ended (resumable; skips cached).
 
-## NEXT ACTION (session 2 starts here)
-1. Re-download data (see DATA section; MIMIC resumable ~2-4 h) and build full tables: `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables`.
-2. D6 Round 4: label-free delta adaptation per setting (from unlabelled stratum time share), Pareto curves, 10 seeds, patient-level bootstrap CIs; MIMIC locked test touched once per final candidate. Scripts to reuse: experiments/r2_new_onset.py, r3_state_aware.py, src/evaluation/metrics.py (alarm_simulation has new-onset/recurrent split).
-3. Write novelty_scorecard.md (honest; current candidate core: N1 new-onset formulation + N7 shortcut finding + N6 3-cohort validation + N2 state-aware policy; first-passage = secondary/negative result).
-4. Then: GRU baseline (pip install torch cpu), full experiments (exp1..exp5 per protocol), figures, manuscript (Critical Care style), 11 reviews, docx, cover letter, risk report.
+- [2026-11-23] SESSION 2: full data built (MIMIC 5,767 stays / 11.55M points; 1 record persistently fails download, excluded; eICU 418; VitalDB 3,472). GRU sequences built (scripts/build_sequences.py). R4 run with extended kappa grid: seeds 0-3 DONE (results/r4/: r4_seeds.csv, r4_pareto.csv + r4_bootstrap.csv for seed 0, r4_log.txt). Seeds 4-9 NOT run (session ended). GRU seed 0 training was interrupted after epoch 0 (val AUPRC 0.189) -> no GRU scores saved.
+- R4 interim (seeds 0-3, pooled/new/rec at 1 alarm/h): SA-kappa[newGBM] (kappa 0.25-0.35) MIMIC val ~.73-.75/.75-.79/.72-.75 vs GBM ~.76/.69/.78; eICU ~.83/.79-.83/.83-.85 vs GBM ~.84/.72-.75/.87; VitalDB new-onset collapses (.28-.35 vs GBM .42-.45). SA-delta keeps OR new-onset (.54-.58) but pooled drops 4-11 pts. => policy = ICU method; OR = limitation. GBM new-onset < MAP in all cohorts (shortcut finding reproduced on full data).
 
-- [2026-11-23] SESSION 2 started: deps reinstalled; downloads relaunched (MIMIC 32 workers ~500 rec/min; VitalDB; eICU demo done). metrics.py: faster _stay_alarms (identical output, verified) + AlarmSim (precomputed, stratum attribution, two-threshold label-free allocation, patient-level bootstrap). experiments/r4_label_free.py written (H-R4 stated in header). protocol_amendments.md A1 written.
-- [2026-11-23] USER DECLARATIONS for manuscript (manuscript/declarations.md): code available on request; no funding; no competing interests. Use verbatim.
+## NEXT ACTION (session 3 starts here — new account)
+0. New account must have GitHub access to Bhargavteja-9779/p_c1_11; check out the latest session branch (session 2: `claude/affectionate-galileo-agi7pp`), read this file.
+1. Rebuild data (data_cache is NOT in git):
+   - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx` and `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+   - `python Target_Journal_Submission/code/src/data/download_mimic3wdb.py data_cache/mimic3wdb 32` (~50 min) ; `.../download_vitaldb.py data_cache/vitaldb 12` (~10 min) ; eICU demo curl (see DATA; patient.csv.gz may 502 -> retry)
+   - `cd Target_Journal_Submission/code && python scripts/build_tables.py --out ../../data_cache/tables` (~25 min) then `python scripts/build_sequences.py ../../data_cache/tables` (~20 min)
+2. Finish R4 seeds 4-9 (do NOT rerun 0-3; ~18 min/seed alone, slower if GRU runs in parallel):
+   `python experiments/r4_label_free.py ../../data_cache/tables ../results/r4_s4_9 --seeds=4,5,6,7,8,9` then concat results/r4/r4_seeds.csv + results/r4_s4_9/r4_seeds.csv and recompute mean±SD summary. Log outcome in novelty_escalation_log.md (Round 4 section exists).
+3. GRU (B5): `python experiments/train_gru.py ../../data_cache/tables 0,1,...,9` (scores -> data_cache/tables/scores/, NOT in git; ~? min/seed on 4 CPU, measure on seed 0 first; reduce to fewer seeds if too slow and document).
+4. Write journal_selection/novelty_scorecard.md (honest): core = N1 new-onset formulation + N7 shortcut finding (GBM < MAP for new-onset in 3 cohorts) + N2 state-aware policy (ICU) + N6 3-cohort validation; OR failure and first-passage = negative results.
+5. Freeze final candidate (state-aware SA-kappa or SA-delta, chosen on MIMIC val only), then run locked MIMIC test ONCE: r4 script with `--final` (adds MIMIC_test). Then full experiments exp1..exp5 per protocol + amendment A1, figures, manuscript (Critical Care style; declarations in manuscript/declarations.md), 11 reviews, docx, cover letter, risk report.

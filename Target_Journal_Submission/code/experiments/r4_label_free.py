@@ -12,6 +12,8 @@ from src.evaluation.metrics import make_sim, paired_bootstrap, bootstrap_ci
 from src import config as C
 TAB, OUT = sys.argv[1], sys.argv[2]; FINAL = "--final" in sys.argv; os.makedirs(OUT, exist_ok=True)
 SEEDS = C.SEEDS if "--seeds1" not in sys.argv else [0]
+for a in sys.argv:
+    if a.startswith("--seeds="): SEEDS = [int(x) for x in a.split("=")[1].split(",")]  # e.g. --seeds=4,5,6,7,8,9 (use a new OUTDIR, then concat r4_seeds.csv)
 KAPPAS = [0.05, 0.1, 0.15, 0.2, 0.25, 0.35, 0.5, 0.75, 1.0, 1.5, 2.0, 4.0]  # extended after seed-0 val selection hit the 0.25 boundary
 DELTAS = np.arange(-2, 3.01, 0.5); TOTAL = 1.0
 log = open(os.path.join(OUT, "r4_log.txt"), "a")
