@@ -1,0 +1,29 @@
+{
+ "shuffled_labels": {
+  "auroc": 0.5759646526344947,
+  "auprc": 0.04129209334031741,
+  "prevalence": 0.03233333333333333
+ },
+ "majority_class": {
+  "auroc": 0.5,
+  "auprc": 0.03233333333333333
+ },
+ "train_frac_0.01": {
+  "n": 611,
+  "auroc": 0.5,
+  "auprc": 0.03233333333333333
+ },
+ "train_frac_0.1": {
+  "n": 6030,
+  "auroc": 0.892575885770497,
+  "auprc": 0.25037795125097523
+ },
+ "drop_top_feature": {
+  "feature": "map_min_15",
+  "auroc": 0.9035440319470438,
+  "auprc": 0.26758710030816196
+ },
+ "groups_in_more_than_one_split": 0,
+ "n_groups": 472,
+ "val_rows_identical_to_a_train_row": 0.0
+}
