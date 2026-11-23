@@ -33,6 +33,8 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
 - [2026-11-23] SESSION 2: full data built (MIMIC 5,767 stays / 11.55M points; 1 record persistently fails download, excluded; eICU 418; VitalDB 3,472). GRU sequences built (scripts/build_sequences.py). R4 run with extended kappa grid: seeds 0-3 DONE (results/r4/: r4_seeds.csv, r4_pareto.csv + r4_bootstrap.csv for seed 0, r4_log.txt). Seeds 4-9 NOT run (session ended). GRU seed 0 training was interrupted after epoch 0 (val AUPRC 0.189) -> no GRU scores saved.
 - R4 interim (seeds 0-3, pooled/new/rec at 1 alarm/h): SA-kappa[newGBM] (kappa 0.25-0.35) MIMIC val ~.73-.75/.75-.79/.72-.75 vs GBM ~.76/.69/.78; eICU ~.83/.79-.83/.83-.85 vs GBM ~.84/.72-.75/.87; VitalDB new-onset collapses (.28-.35 vs GBM .42-.45). SA-delta keeps OR new-onset (.54-.58) but pooled drops 4-11 pts. => policy = ICU method; OR = limitation. GBM new-onset < MAP in all cohorts (shortcut finding reproduced on full data).
 
+- [2026-11-23] SESSION 3 started on branch `claude/upbeat-lamport-a7apim` (fast-forwarded from session-2 branch). Deps installed; eICU demo downloaded; VitalDB + MIMIC downloads running. Targeted prior-art search for new-onset/shortcut claims (novelty_map_round2.csv) launched.
+
 ## NEXT ACTION (session 3 starts here — new account)
 0. New account must have GitHub access to Bhargavteja-9779/p_c1_11; check out the latest session branch (session 2: `claude/affectionate-galileo-agi7pp`), read this file.
 1. Rebuild data (data_cache is NOT in git):
