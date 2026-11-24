@@ -37,11 +37,13 @@ def add_since_last(D, stays):  # identical to exp_final.py
     D["since_last"] = out; D["stratumA"] = D["since_last"] > 360
     return D
 
-def load(co, cols=None):  # identical filtering/order to exp_final.py
-    full = pd.read_parquet(f"{TAB}/{co}_points.parquet", columns=cols); keep = np.flatnonzero(full.obs15.to_numpy())
-    D = full.iloc[keep].drop(columns=[c for c in DROP if c in full.columns]).reset_index(drop=True); D["row"] = keep; del full
-    for c in D.columns:
-        if D[c].dtype == "float64" and c != "t_min": D[c] = D[c].astype("float32")
+def load(co, cols=None):  # memory-lean loader (session 4): same rows, order and values as before, float64 -> float32 except t_min
+    import pyarrow.parquet as pq, pyarrow.compute as pc, pyarrow as pa
+    f = f"{TAB}/{co}_points.parquet"; names = [c for c in pq.read_schema(f).names if c not in DROP and (cols is None or c in cols)]
+    tb = pq.read_table(f, columns=names); keep = np.flatnonzero(tb.column("obs15").to_numpy(zero_copy_only=False))
+    tb = tb.take(pa.array(keep))
+    tb = tb.cast(pa.schema([pa.field(fl.name, pa.float32()) if (pa.types.is_floating(fl.type) and fl.name != "t_min") else fl for fl in tb.schema]))
+    D = tb.to_pandas(self_destruct=True); del tb; D["row"] = keep
     stays = {s["stay_id"]: s for s in json.load(open(f"{TAB}/{co}_stays.json")) if "error" not in s}
     return add_since_last(D, stays), stays
 

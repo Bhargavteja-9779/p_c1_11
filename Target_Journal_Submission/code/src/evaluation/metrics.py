@@ -10,14 +10,24 @@ def point_metrics(y, p):
         out["auroc"] = float(roc_auc_score(y, p)); out["auprc"] = float(average_precision_score(y, p))
     return out
 
+def _logit_mle(y, x, free_slope=True, iters=50, tol=1e-10):
+    """MLE of P(y=1) = sigmoid(a + b*x) (free_slope) or sigmoid(a + x) (offset only). Returns (a, b)."""
+    a, b = 0.0, (0.0 if free_slope else 1.0)
+    for _ in range(iters):
+        eta = a + b * x; mu = 1.0 / (1.0 + np.exp(-eta)); w = mu * (1 - mu); r = y - mu
+        if free_slope:
+            g = np.array([r.sum(), (r * x).sum()]); H = np.array([[w.sum(), (w * x).sum()], [(w * x).sum(), (w * x * x).sum()]])
+            step = np.linalg.solve(H, g); a += step[0]; b += step[1]
+        else:
+            step = r.sum() / w.sum(); a += step; step = np.array([step])
+        if np.max(np.abs(step)) < tol: break
+    return a, b
+
 def calibration(y, p, bins=10):
     y = np.asarray(y, float); p = np.clip(np.asarray(p, float), 1e-6, 1 - 1e-6)
     lp = np.log(p / (1 - p))
-    import statsmodels.api as sm
-    try:
-        fit = sm.GLM(y, sm.add_constant(lp), family=sm.families.Binomial()).fit()
-        slope = float(fit.params[1])
-        inter = float(sm.GLM(y, np.ones_like(lp), family=sm.families.Binomial(), offset=lp).fit().params[0])
+    try:  # maximum-likelihood logistic recalibration by Newton-Raphson (same MLE as statsmodels GLM Binomial; low memory)
+        slope = float(_logit_mle(y, lp, free_slope=True)[1]); inter = float(_logit_mle(y, lp, free_slope=False)[0])
     except Exception: slope, inter = np.nan, np.nan
     q = np.quantile(p, np.linspace(0, 1, bins + 1)); idx = np.clip(np.searchsorted(q, p, side="right") - 1, 0, bins - 1)
     ece = sum(abs(y[idx == b].mean() - p[idx == b].mean()) * (idx == b).mean() for b in range(bins) if (idx == b).any())

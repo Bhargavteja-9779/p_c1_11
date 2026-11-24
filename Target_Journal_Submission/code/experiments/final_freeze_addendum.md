@@ -38,3 +38,8 @@ All S1-S5 results are secondary/exploratory, reported with 95% CIs, no Holm adju
   training subset is built once instead of per seed; same rows, same random sample) and the job was re-run ALONE with the system memory
   allocator. No method, parameter, threshold or analysis was changed. The re-run's seed-0 numbers must reproduce run 1's printed values
   exactly (deterministic training); this is checked and reported. Run-1 log kept as results/final/run1_oom_log.txt.
+- Run 2 (same code + memory fix above) was also killed at the same point. Diagnosis: each calibration fit with statsmodels GLM on ~2.3 M
+  points retained ~1.9 GB (4 probabilistic methods x 3 cohorts > 15 GB). Fix: calibration slope/intercept computed by an equivalent
+  Newton-Raphson maximum-likelihood fit (src/evaluation/metrics.py::_logit_mle), and a column-selective parquet loader (same rows, order,
+  values). Verified on the MIMIC validation dry run: every alarm metric and AUROC identical (max |diff| = 0), calibration slope/intercept
+  identical to 1e-13; peak memory 6.9 GB. Run-2 log: results/final/run2_oom_log.txt. Run 3 is the reported locked-test run.

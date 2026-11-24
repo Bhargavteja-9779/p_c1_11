@@ -26,7 +26,8 @@ for s in range(10):
 BURDENS = C.ALARM_BURDENS; H = C.PRIMARY_H
 log = open(os.path.join(OUT, "log.txt"), "a")
 def P(*a):
-    s = " ".join(str(x) for x in a); print(s, flush=True); log.write(s + "\n"); log.flush()
+    rss = [l for l in open("/proc/self/status") if l.startswith("VmRSS")][0].split()[1]
+    s = " ".join(str(x) for x in a) + f"  [rss {int(rss) / 1048576:.1f} GB]"; print(s, flush=True); log.write(s + "\n"); log.flush()
 P("=== exp_final", time.strftime("%Y-%m-%d %H:%M:%S"), "FINAL" if FINAL else "DRY-RUN (MIMIC val as internal)", "seeds", SEEDS)
 
 def add_since_last(D, stays):
@@ -40,11 +41,13 @@ def add_since_last(D, stays):
     return D
 
 DROP = ["y5", "obs5", "y10", "obs10", "y30", "obs30", "tto", "t_idx", "cohort", "hospital"]
-def load(co):
-    full = pd.read_parquet(f"{TAB}/{co}_points.parquet"); keep = np.flatnonzero(full.obs15.to_numpy())
-    D = full.iloc[keep].drop(columns=[c for c in DROP if c in full.columns]).reset_index(drop=True); D["row"] = keep; del full
-    for c in D.columns:
-        if D[c].dtype == "float64" and c != "t_min": D[c] = D[c].astype("float32")
+def load(co, cols=None):  # memory-lean loader (session 4): same rows, order and values as before, float64 -> float32 except t_min
+    import pyarrow.parquet as pq, pyarrow.compute as pc, pyarrow as pa
+    f = f"{TAB}/{co}_points.parquet"; names = [c for c in pq.read_schema(f).names if c not in DROP and (cols is None or c in cols)]
+    tb = pq.read_table(f, columns=names); keep = np.flatnonzero(tb.column("obs15").to_numpy(zero_copy_only=False))
+    tb = tb.take(pa.array(keep))
+    tb = tb.cast(pa.schema([pa.field(fl.name, pa.float32()) if (pa.types.is_floating(fl.type) and fl.name != "t_min") else fl for fl in tb.schema]))
+    D = tb.to_pandas(self_destruct=True); del tb; D["row"] = keep
     stays = {s["stay_id"]: s for s in json.load(open(f"{TAB}/{co}_stays.json")) if "error" not in s}
     return add_since_last(D, stays), stays
 
@@ -85,7 +88,7 @@ for seed in SEEDS:
         sc = dict(det[k]) if seed == SEEDS[0] else {}
         sc.update(LR=logit(lr.predict_proba(D[fc].to_numpy(float))), GBM=logit(gB.predict_proba(D[fc])))
         if os.path.exists(gru_f): sc["GRU"] = np.load(gru_f)[D.row.to_numpy()].astype(float)
-        sA = logit(gA.predict_proba(D[fc]))
+        P(f"  {k}: scored GBM/LR"); sA = logit(gA.predict_proba(D[fc]))
         sd = os.path.join(OUT, "scores"); os.makedirs(sd, exist_ok=True)  # saved for exp_extra.py (no analysis change)
         np.save(f"{sd}/{k}_GBM_seed{seed}.npy", sc["GBM"].astype("float32")); np.save(f"{sd}/{k}_newGBM_seed{seed}.npy", sA.astype("float32"))
         if seed == SEEDS[0]: np.save(f"{sd}/{k}_MAP.npy", det[k]["MAP"].astype("float32"))
@@ -96,7 +99,7 @@ for seed in SEEDS:
             for strat, msk in (("new_stratum", A), ("recent_stratum", ~A)):
                 pm = point_metrics(y[msk], s[msk]); r[f"auroc_{strat}"] = pm.get("auroc"); r[f"auprc_{strat}"] = pm.get("auprc")
             pts.append(r)
-        Rs1 = {}
+        P(f"  {k}: point metrics done"); Rs1 = {}
         for b in BURDENS:
             for m, s in sc.items():
                 _, R = sim.threshold_for_burden(s, b); alarm_rows(seed, k, m, R, b)

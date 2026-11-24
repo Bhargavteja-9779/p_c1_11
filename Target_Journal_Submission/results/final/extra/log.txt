@@ -1,0 +1,5 @@
+=== exp_extra 2026-11-24 00:40:00 FINAL seeds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+MIMIC train events: new 3640 recurrent 13557 -> delta*_train = 1.315; implied pooled weight 0.212
+loaded 16 s
+MIMIC_test {'cohort': 'MIMIC_test', 'N_new': 1188, 'N_rec': 4721, 'delta_theory_local': 1.3797494206236964, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.2790393778536142, 'delta_xfit_half1': 1.4468336040675436, 'implied_weight_pooled': 0.20104924691149095}
+seed 0 MIMIC_test @1/h: GBM 0.773/0.675/0.797 | SA-theory[train] 0.744/0.790/0.732 | SA-theory[xfit] 0.743/0.787/0.732 | MAP 0.722/0.716/0.723 (58 s)
