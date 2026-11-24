@@ -45,7 +45,11 @@ Resume rule: read this file, continue from "NEXT ACTION". Session 1 branch: `cla
   - B's tests (tests/test_core.py, 8) pass on merged code; needs `pip install numba`.
   - Read RECHECK/PROGRESS.md and RECHECK/stage3/prior_art_report.md before writing the manuscript (novelty is PARTIAL; cite Kim 2026 and Wang 2026 medRxiv prominently).
 
-## NEXT ACTION (session 4 starts here — new account)
+- [2026-11-24] SESSION 4 COMPLETE. Locked MIMIC test run (run 3; runs 1-2 OOM, memory-only fixes, seed-0 reproduced exactly; documented in final_freeze_addendum.md). Results: results/final/ (holm_primary.csv, extra/). Figures: figures/. Manuscript, Additional file 1, cover letter: manuscript/*.md|docx. Submission zip: submission_build/Critical_Care_Submission.zip (rebuild: bash Target_Journal_Submission/code/scripts/build_submission.sh).
+  - Key results: GBM-MAP new-onset -4.1/-5.8/-6.6 pts (Holm p .009/.009/.063); SA-kappa-GBM new-onset +9.1/+6.2/-13.3; pooled -1.5/-0.9/-0.3; SA-theory (delta*=1.31) new-onset +11.5/+8.3/+16.6 vs GBM; T1/T2 pass in all 3 cohorts; noHist ablation new-onset +8.4/+5.6/+9.1.
+  - Remaining for authors: fill [SECOND AUTHOR NAME]/[EMAIL]/[INITIALS]/[DATE]; decide on AI-use sentence (Methods); optional clinician co-author; verify 2025 JIF/APC before submitting.
+
+## (Historical) ## NEXT ACTION (session 4 starts here — new account)
 0. Check out branch `claude/upbeat-lamport-a7apim` (session 3; contains sessions 1-3). Read this file + code/experiments/final_freeze.md.
 1. Rebuild data (data_cache NOT in git), ~1.5 h total:
    - `pip install lightgbm scikit-learn scipy statsmodels pandas pyarrow wfdb vitaldb matplotlib python-docx numba` ; `pip install torch --index-url https://download.pytorch.org/whl/cpu`

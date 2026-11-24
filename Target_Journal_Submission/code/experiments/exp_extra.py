@@ -1,4 +1,4 @@
-"""Pre-specified secondary analyses added before the locked test (see experiments/final_freeze_addendum.md).
+"""Pre-specified secondary analyses added before the locked test (Additional file 1, Section S1.3).
 Reads the per-seed scores written by exp_final.py (OUTDIR/scores) and the same cohort tables.
   S1  SA-theory: tuning-free state-aware offset delta* = log(N_rec / N_new) (Proposition 2, w = 1/2)
       (a) delta from MIMIC TRAINING event counts (no information from the evaluation cohort);
@@ -37,7 +37,7 @@ def add_since_last(D, stays):  # identical to exp_final.py
     D["since_last"] = out; D["stratumA"] = D["since_last"] > 360
     return D
 
-def load(co, cols=None):  # memory-lean loader (session 4): same rows, order and values as before, float64 -> float32 except t_min
+def load(co, cols=None):  # memory-lean loader: same rows, order and values as before, float64 -> float32 except t_min
     import pyarrow.parquet as pq, pyarrow.compute as pc, pyarrow as pa
     f = f"{TAB}/{co}_points.parquet"; names = [c for c in pq.read_schema(f).names if c not in DROP and (cols is None or c in cols)]
     tb = pq.read_table(f, columns=names); keep = np.flatnonzero(tb.column("obs15").to_numpy(zero_copy_only=False))

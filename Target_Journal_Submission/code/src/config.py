@@ -1,4 +1,4 @@
-"""Central configuration (mirrors experiments/protocol.md)."""
+"""Central configuration (mirrors the protocol, Additional file 1, Section S1)."""
 import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))          # Target_Journal_Submission
 REPO = os.path.abspath(os.path.join(ROOT, ".."))

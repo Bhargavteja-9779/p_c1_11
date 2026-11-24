@@ -1,9 +1,5 @@
-"""Final evaluation (Exp-2 internal, Exp-3 external) of all frozen methods — see experiments/final_freeze.md.
-Methods: MAP, LinExtrap, FP, LR, GBM, GRU, SA-kappa[newGBM] (primary), SA-delta[newGBM] (secondary).
-kappa / delta per seed are READ from the Round-4 val selections (no re-selection here).
-Usage: python experiments/exp_final.py TABLES OUTDIR [--final] [--seeds=0,1,...]
-  Without --final the MIMIC *validation* split is used as the internal cohort (dry run, test untouched).
-  With --final the locked MIMIC test is evaluated (run ONCE, after the dry run is verified)."""
+"""Holm-corrected tests of the nine pre-specified primary comparisons (Additional file 1, Section S1.3) on the locked test.
+Usage: python experiments/exp_holm.py TABLES OUTDIR --final --seeds=0"""
 import os, sys, json, time
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import numpy as np, pandas as pd
@@ -41,7 +37,7 @@ def add_since_last(D, stays):
     return D
 
 DROP = ["y5", "obs5", "y10", "obs10", "y30", "obs30", "tto", "t_idx", "cohort", "hospital"]
-def load(co, cols=None):  # memory-lean loader (session 4): same rows, order and values as before, float64 -> float32 except t_min
+def load(co, cols=None):  # memory-lean loader: same rows, order and values as before, float64 -> float32 except t_min
     import pyarrow.parquet as pq, pyarrow.compute as pc, pyarrow as pa
     f = f"{TAB}/{co}_points.parquet"; names = [c for c in pq.read_schema(f).names if c not in DROP and (cols is None or c in cols)]
     tb = pq.read_table(f, columns=names); keep = np.flatnonzero(tb.column("obs15").to_numpy(zero_copy_only=False))
@@ -71,7 +67,7 @@ for k, (D, S) in cohorts.items():
 
 trA_full = tr[tr.stratumA]
 
-# Holm step-down over the 9 pre-specified primary tests (final_freeze.md), seed-0 models, 1,000 paired patient-level resamples
+# Holm step-down over the 9 pre-specified primary tests (Additional file 1, S1.3), seed-0 models, 1,000 paired patient-level resamples
 # (same resampling seed and procedure as metrics.paired_bootstrap, so estimates/CIs reproduce bootstrap_seed0.csv).
 seed = SEEDS[0]
 trs = tr.sample(min(600000, len(tr)), random_state=seed); trA = trA_full.sample(min(600000, len(trA_full)), random_state=seed)

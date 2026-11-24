@@ -1,4 +1,4 @@
-"""Final evaluation (Exp-2 internal, Exp-3 external) of all frozen methods — see experiments/final_freeze.md.
+"""Final evaluation (Exp-2 internal, Exp-3 external) of all frozen methods — see Additional file 1, Section S1.3.
 Methods: MAP, LinExtrap, FP, LR, GBM, GRU, SA-kappa[newGBM] (primary), SA-delta[newGBM] (secondary).
 kappa / delta per seed are READ from the Round-4 val selections (no re-selection here).
 Usage: python experiments/exp_final.py TABLES OUTDIR [--final] [--seeds=0,1,...]
@@ -41,7 +41,7 @@ def add_since_last(D, stays):
     return D
 
 DROP = ["y5", "obs5", "y10", "obs10", "y30", "obs30", "tto", "t_idx", "cohort", "hospital"]
-def load(co, cols=None):  # memory-lean loader (session 4): same rows, order and values as before, float64 -> float32 except t_min
+def load(co, cols=None):  # memory-lean loader: same rows, order and values as before, float64 -> float32 except t_min
     import pyarrow.parquet as pq, pyarrow.compute as pc, pyarrow as pa
     f = f"{TAB}/{co}_points.parquet"; names = [c for c in pq.read_schema(f).names if c not in DROP and (cols is None or c in cols)]
     tb = pq.read_table(f, columns=names); keep = np.flatnonzero(tb.column("obs15").to_numpy(zero_copy_only=False))

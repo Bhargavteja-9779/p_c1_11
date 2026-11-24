@@ -3,7 +3,7 @@
 P N Bhargav Teja¹, [SECOND AUTHOR NAME]¹*
 
 ¹ Vellore Institute of Technology (VIT), Vellore, Tamil Nadu, India.
-\* Corresponding author: [SECOND AUTHOR NAME], [EMAIL PLACEHOLDER]
+* Corresponding author: [SECOND AUTHOR NAME], [EMAIL PLACEHOLDER]
 
 ## Abstract
 
@@ -32,7 +32,7 @@ We aimed (1) to quantify how well a low-MAP alarm and trained models warn of new
 ### Study design and data sources
 This was a retrospective study of three publicly available, de-identified datasets, analysed under a protocol written and time-stamped in version control before any model result was seen (version 1.0; not registered in a public registry), with one documented amendment made on development data before the confirmatory analysis (Additional file 1). Reporting follows TRIPOD+AI where applicable [23].
 
-*Development and internal test cohort:* the MIMIC-III Waveform Database Matched Subset [24–26], minute-level numeric vital signs recorded in ICUs of a single tertiary centre (Boston, USA). Records with invasive arterial pressure were split at the patient level into training (60%), validation (20%) and test (20%) sets using a fixed hash of the subject identifier. The test set was locked and evaluated once, after all methods and parameters had been frozen.
+*Development and internal test cohort:* the MIMIC-III Waveform Database Matched Subset [24–26], minute-level numeric vital signs recorded in ICUs of a single tertiary centre (Boston, USA). Records with invasive arterial pressure were split at the patient level into training (60%), validation (20%) and test (20%) sets using a fixed hash of the subject identifier. The test set was locked and analysed in a single pre-specified analysis after all methods and parameters had been frozen.
 
 *External ICU cohort:* the eICU Collaborative Research Database demo [27, 28], with periodic vital signs (5-min resolution) from 128 US hospitals.
 

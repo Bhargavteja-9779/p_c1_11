@@ -1,4 +1,4 @@
-"""D6 Round 4: label-free transfer of the state-aware policy (H-R4), Pareto curves, 10 seeds, patient-level bootstrap.
+"""Development round 4: label-free transfer of the state-aware policy (H-R4), Pareto curves, 10 seeds, patient-level bootstrap.
 H-R4 (written before testing): fixing the RATIO of alarm intensities between strata (kappa = alarms per stratum-A hour /
 alarms per stratum-B hour, chosen on MIMIC val) and re-setting both thresholds in each new cohort from unlabelled data only
 will (a) keep the ICU new-onset gain (>=5 pts over GBM at 1 alarm/h) and (b) remove the OR failure of the fixed logit offset

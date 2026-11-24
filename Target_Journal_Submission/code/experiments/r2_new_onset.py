@@ -1,4 +1,4 @@
-"""D6 Round 2: new-onset vs recurrent hypotension episodes (H-R2)."""
+"""Development round 2: new-onset vs recurrent hypotension episodes (H-R2)."""
 import os, sys, json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import numpy as np, pandas as pd

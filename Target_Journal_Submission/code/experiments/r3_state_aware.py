@@ -1,4 +1,4 @@
-"""D6 Round 3: state-aware warning policy (H-R3)."""
+"""Development round 3: state-aware warning policy (H-R3)."""
 import os, sys, json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import numpy as np, pandas as pd
