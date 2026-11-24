@@ -1,0 +1,16 @@
+=== exp_extra 2026-11-24 00:29:34 DRY-RUN seeds [0]
+MIMIC train events: new 3640 recurrent 13557 -> delta*_train = 1.315; implied pooled weight 0.212
+loaded 14 s
+MIMIC_val {'cohort': 'MIMIC_val', 'N_new': 1236, 'N_rec': 4689, 'delta_theory_local': 1.3333389810719503, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.298541199362177, 'delta_xfit_half1': 1.3664355524702874, 'implied_weight_pooled': 0.20860759493670886}
+seed 0 MIMIC_val @1/h: GBM 0.761/0.689/0.780 | SA-theory[train] 0.730/0.794/0.714 | SA-theory[xfit] 0.730/0.795/0.713 | MAP 0.706/0.710/0.705 (55 s)
+eICU {'cohort': 'eICU', 'N_new': 515, 'N_rec': 1749, 'delta_theory_local': 1.222632574354866, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.3822043758683655, 'delta_xfit_half1': 1.0518570895890473, 'implied_weight_pooled': 0.22747349823321555}
+seed 0 eICU @1/h: GBM 0.845/0.728/0.879 | SA-theory[train] 0.824/0.812/0.828 | SA-theory[xfit] 0.830/0.810/0.836 | MAP 0.816/0.786/0.825 (11 s)
+VitalDB {'cohort': 'VitalDB', 'N_new': 241, 'N_rec': 1399, 'delta_theory_local': 1.7587160411748262, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.7875131783466038, 'delta_xfit_half1': 1.730287605134387, 'implied_weight_pooled': 0.1469512195121951}
+seed 0 VitalDB @1/h: GBM 0.507/0.423/0.522 | SA-theory[train] 0.416/0.589/0.387 | SA-theory[xfit] 0.365/0.643/0.317 | MAP 0.488/0.490/0.487 (40 s)
+T1/T2 MIMIC_val: oracle delta 1.25 (J 0.757); theory local 1.33, train 1.31; |oracle-theory_train| = 0.06; J(SA-theory[train]) / J(oracle) = 0.996
+T1/T2 eICU: oracle delta 1.75 (J 0.833); theory local 1.22, train 1.31; |oracle-theory_train| = 0.44; J(SA-theory[train]) / J(oracle) = 0.985
+T1/T2 VitalDB: oracle delta 0.75 (J 0.500); theory local 1.76, train 1.31; |oracle-theory_train| = 0.56; J(SA-theory[train]) / J(oracle) = 0.976
+ablation seed 0 MIMIC_val: GBM_noHist 0.746/0.756/0.744 vs GBM 0.761/0.689/0.780
+ablation seed 0 eICU: GBM_noHist 0.833/0.784/0.847 vs GBM 0.845/0.728/0.879
+ablation seed 0 VitalDB: GBM_noHist 0.507/0.515/0.505 vs GBM 0.507/0.423/0.522
+done 145 s
