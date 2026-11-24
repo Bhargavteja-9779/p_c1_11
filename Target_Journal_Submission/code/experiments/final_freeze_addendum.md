@@ -31,3 +31,10 @@ Alarms per warned new-onset event, all methods, at each burden (descriptive).
 
 ## Multiplicity
 All S1-S5 results are secondary/exploratory, reported with 95% CIs, no Holm adjustment, and labelled as such.
+
+## Deviation log — locked-test execution (2026-11-24)
+- Run 1 (00:32 UTC, `--final`, 10 seeds) was killed by the operating system (out of memory, exit 137) during seed 0 after MIMIC-test and eICU
+  results for seed 0 had been printed; VitalDB seed 0 and seeds 1–9 were not computed. A memory-only change was then made (the stratum-A
+  training subset is built once instead of per seed; same rows, same random sample) and the job was re-run ALONE with the system memory
+  allocator. No method, parameter, threshold or analysis was changed. The re-run's seed-0 numbers must reproduce run 1's printed values
+  exactly (deterministic training); this is checked and reported. Run-1 log kept as results/final/run1_oom_log.txt.

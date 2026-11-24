@@ -66,6 +66,7 @@ for k, (D, S) in cohorts.items():
     pfp = fp.predict_proba(D, H)
     det[k] = dict(MAP=score_current_map(D), LinExtrap=score_linear_extrap(D, H), FP=logit(pfp))
 
+trA_full = tr[tr.stratumA]
 rows, pts, boots = [], [], []
 def alarm_rows(seed, k, name, R, burden):
     rows.append(dict(seed=seed, cohort=k, method=name, burden_target=burden, **sims[k].summarize(R)))
@@ -73,7 +74,7 @@ def alarm_rows(seed, k, name, R, burden):
 for seed in SEEDS:
     ts = time.time()
     trs = tr.sample(min(600000, len(tr)), random_state=seed)
-    trA = tr[tr.stratumA]; trA = trA.sample(min(600000, len(trA)), random_state=seed)
+    trA = trA_full.sample(min(600000, len(trA_full)), random_state=seed)  # identical rows/sample to before; trA_full built once (memory)
     gB = GBM(seed=seed).fit(trs[fc], trs.y15); gA = GBM(seed=seed).fit(trA[fc], trA.y15)
     lr = LogReg(seed=seed).fit(trs[fc].to_numpy(float), trs.y15.to_numpy())
     kap, dlt = SEL[seed]["kappa"], SEL[seed]["delta"]
