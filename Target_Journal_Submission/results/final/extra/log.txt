@@ -3,3 +3,52 @@ MIMIC train events: new 3640 recurrent 13557 -> delta*_train = 1.315; implied po
 loaded 16 s
 MIMIC_test {'cohort': 'MIMIC_test', 'N_new': 1188, 'N_rec': 4721, 'delta_theory_local': 1.3797494206236964, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.2790393778536142, 'delta_xfit_half1': 1.4468336040675436, 'implied_weight_pooled': 0.20104924691149095}
 seed 0 MIMIC_test @1/h: GBM 0.773/0.675/0.797 | SA-theory[train] 0.744/0.790/0.732 | SA-theory[xfit] 0.743/0.787/0.732 | MAP 0.722/0.716/0.723 (58 s)
+=== exp_extra 2026-11-24 01:18:00 FINAL seeds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+MIMIC train events: new 3640 recurrent 13557 -> delta*_train = 1.315; implied pooled weight 0.212
+loaded 14 s
+MIMIC_test {'cohort': 'MIMIC_test', 'N_new': 1188, 'N_rec': 4721, 'delta_theory_local': 1.3797494206236964, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.2790393778536142, 'delta_xfit_half1': 1.4468336040675436, 'implied_weight_pooled': 0.20104924691149095}
+seed 0 MIMIC_test @1/h: GBM 0.773/0.675/0.797 | SA-theory[train] 0.744/0.790/0.732 | SA-theory[xfit] 0.743/0.787/0.732 | MAP 0.722/0.716/0.723 (60 s)
+seed 1 MIMIC_test @1/h: GBM 0.771/0.678/0.795 | SA-theory[train] 0.748/0.797/0.735 | SA-theory[xfit] 0.745/0.795/0.733 (15 s)
+seed 2 MIMIC_test @1/h: GBM 0.770/0.678/0.793 | SA-theory[train] 0.746/0.785/0.736 | SA-theory[xfit] 0.742/0.785/0.732 (16 s)
+seed 3 MIMIC_test @1/h: GBM 0.775/0.684/0.798 | SA-theory[train] 0.748/0.780/0.740 | SA-theory[xfit] 0.747/0.784/0.738 (18 s)
+seed 4 MIMIC_test @1/h: GBM 0.772/0.674/0.797 | SA-theory[train] 0.751/0.803/0.737 | SA-theory[xfit] 0.746/0.801/0.733 (17 s)
+seed 5 MIMIC_test @1/h: GBM 0.774/0.682/0.797 | SA-theory[train] 0.747/0.790/0.736 | SA-theory[xfit] 0.746/0.790/0.735 (17 s)
+seed 6 MIMIC_test @1/h: GBM 0.772/0.679/0.796 | SA-theory[train] 0.744/0.783/0.734 | SA-theory[xfit] 0.741/0.781/0.731 (17 s)
+seed 7 MIMIC_test @1/h: GBM 0.775/0.678/0.799 | SA-theory[train] 0.745/0.794/0.733 | SA-theory[xfit] 0.742/0.794/0.730 (17 s)
+seed 8 MIMIC_test @1/h: GBM 0.775/0.678/0.799 | SA-theory[train] 0.743/0.789/0.731 | SA-theory[xfit] 0.740/0.792/0.727 (18 s)
+seed 9 MIMIC_test @1/h: GBM 0.774/0.673/0.799 | SA-theory[train] 0.748/0.795/0.736 | SA-theory[xfit] 0.747/0.797/0.734 (15 s)
+eICU {'cohort': 'eICU', 'N_new': 515, 'N_rec': 1749, 'delta_theory_local': 1.222632574354866, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.3822043758683655, 'delta_xfit_half1': 1.0518570895890473, 'implied_weight_pooled': 0.22747349823321555}
+seed 0 eICU @1/h: GBM 0.845/0.728/0.879 | SA-theory[train] 0.824/0.812/0.828 | SA-theory[xfit] 0.830/0.810/0.836 | MAP 0.816/0.786/0.825 (11 s)
+seed 1 eICU @1/h: GBM 0.849/0.736/0.883 | SA-theory[train] 0.834/0.821/0.838 | SA-theory[xfit] 0.837/0.816/0.844 (3 s)
+seed 2 eICU @1/h: GBM 0.845/0.728/0.880 | SA-theory[train] 0.830/0.825/0.831 | SA-theory[xfit] 0.830/0.819/0.833 (3 s)
+seed 3 eICU @1/h: GBM 0.842/0.748/0.870 | SA-theory[train] 0.825/0.821/0.826 | SA-theory[xfit] 0.830/0.831/0.830 (3 s)
+seed 4 eICU @1/h: GBM 0.844/0.732/0.877 | SA-theory[train] 0.832/0.823/0.835 | SA-theory[xfit] 0.833/0.810/0.840 (3 s)
+seed 5 eICU @1/h: GBM 0.842/0.720/0.878 | SA-theory[train] 0.833/0.823/0.835 | SA-theory[xfit] 0.833/0.812/0.839 (3 s)
+seed 6 eICU @1/h: GBM 0.835/0.717/0.870 | SA-theory[train] 0.835/0.808/0.843 | SA-theory[xfit] 0.838/0.810/0.846 (3 s)
+seed 7 eICU @1/h: GBM 0.847/0.742/0.878 | SA-theory[train] 0.831/0.817/0.835 | SA-theory[xfit] 0.833/0.816/0.838 (3 s)
+seed 8 eICU @1/h: GBM 0.843/0.726/0.878 | SA-theory[train] 0.841/0.821/0.846 | SA-theory[xfit] 0.842/0.816/0.850 (3 s)
+seed 9 eICU @1/h: GBM 0.850/0.730/0.886 | SA-theory[train] 0.835/0.814/0.842 | SA-theory[xfit] 0.837/0.814/0.844 (4 s)
+VitalDB {'cohort': 'VitalDB', 'N_new': 241, 'N_rec': 1399, 'delta_theory_local': 1.7587160411748262, 'delta_theory_train': 1.314919337448603, 'delta_xfit_half0': 1.7875131783466038, 'delta_xfit_half1': 1.730287605134387, 'implied_weight_pooled': 0.1469512195121951}
+seed 0 VitalDB @1/h: GBM 0.507/0.423/0.522 | SA-theory[train] 0.416/0.589/0.387 | SA-theory[xfit] 0.365/0.643/0.317 | MAP 0.488/0.490/0.487 (41 s)
+seed 1 VitalDB @1/h: GBM 0.510/0.419/0.526 | SA-theory[train] 0.363/0.573/0.327 | SA-theory[xfit] 0.332/0.622/0.282 (11 s)
+seed 2 VitalDB @1/h: GBM 0.496/0.427/0.508 | SA-theory[train] 0.441/0.552/0.422 | SA-theory[xfit] 0.399/0.610/0.363 (12 s)
+seed 3 VitalDB @1/h: GBM 0.495/0.407/0.510 | SA-theory[train] 0.384/0.589/0.348 | SA-theory[xfit] 0.338/0.606/0.292 (11 s)
+seed 4 VitalDB @1/h: GBM 0.487/0.427/0.497 | SA-theory[train] 0.401/0.618/0.363 | SA-theory[xfit] 0.344/0.631/0.294 (11 s)
+seed 5 VitalDB @1/h: GBM 0.491/0.432/0.501 | SA-theory[train] 0.412/0.535/0.390 | SA-theory[xfit] 0.363/0.589/0.324 (10 s)
+seed 6 VitalDB @1/h: GBM 0.506/0.452/0.515 | SA-theory[train] 0.404/0.544/0.380 | SA-theory[xfit] 0.346/0.573/0.307 (11 s)
+seed 7 VitalDB @1/h: GBM 0.496/0.402/0.513 | SA-theory[train] 0.420/0.531/0.401 | SA-theory[xfit] 0.360/0.581/0.322 (12 s)
+seed 8 VitalDB @1/h: GBM 0.508/0.465/0.515 | SA-theory[train] 0.451/0.519/0.440 | SA-theory[xfit] 0.415/0.581/0.387 (11 s)
+seed 9 VitalDB @1/h: GBM 0.498/0.440/0.508 | SA-theory[train] 0.382/0.589/0.347 | SA-theory[xfit] 0.337/0.639/0.285 (10 s)
+T1/T2 MIMIC_test: oracle delta 1.5 (J 0.764); theory local 1.38, train 1.31; |oracle-theory_train| = 0.19; J(SA-theory[train]) / J(oracle) = 0.997
+T1/T2 eICU: oracle delta 1.75 (J 0.833); theory local 1.22, train 1.31; |oracle-theory_train| = 0.44; J(SA-theory[train]) / J(oracle) = 0.985
+T1/T2 VitalDB: oracle delta 0.75 (J 0.500); theory local 1.76, train 1.31; |oracle-theory_train| = 0.56; J(SA-theory[train]) / J(oracle) = 0.976
+ablation seed 0 MIMIC_test: GBM_noHist 0.762/0.759/0.762 vs GBM 0.773/0.675/0.797
+ablation seed 0 eICU: GBM_noHist 0.833/0.784/0.847 vs GBM 0.845/0.728/0.879
+ablation seed 0 VitalDB: GBM_noHist 0.507/0.515/0.505 vs GBM 0.507/0.423/0.522
+ablation seed 1 MIMIC_test: GBM_noHist 0.759/0.758/0.759 vs GBM 0.771/0.678/0.795
+ablation seed 1 eICU: GBM_noHist 0.842/0.794/0.856 vs GBM 0.849/0.736/0.883
+ablation seed 1 VitalDB: GBM_noHist 0.481/0.490/0.480 vs GBM 0.510/0.419/0.526
+ablation seed 2 MIMIC_test: GBM_noHist 0.763/0.763/0.763 vs GBM 0.770/0.678/0.793
+ablation seed 2 eICU: GBM_noHist 0.837/0.794/0.850 vs GBM 0.845/0.728/0.880
+ablation seed 2 VitalDB: GBM_noHist 0.493/0.485/0.495 vs GBM 0.496/0.427/0.508
+done 484 s
