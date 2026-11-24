@@ -1,0 +1,12 @@
+=== exp_holm 2026-11-24 01:26:21 FINAL seeds [0]  [rss 0.2 GB]
+loaded {'MIMIC_test': (2326623, 1095, 0.0305), 'eICU': (167487, 408, 0.0351), 'VitalDB': (524917, 3411, 0.0381)} 8 s  [rss 5.3 GB]
+       cohort              comparison           metric     est      lo      hi  p_boot  p_holm  significant_holm_0.05
+0  MIMIC_test               GBM - MAP  sensitivity_new -0.0412 -0.0623 -0.0199   0.001   0.009                   True
+1  MIMIC_test  SA-kappa[newGBM] - GBM  sensitivity_new  0.0909  0.0740  0.1086   0.001   0.009                   True
+2  MIMIC_test  SA-kappa[newGBM] - GBM      sensitivity -0.0154 -0.0226 -0.0086   0.001   0.009                   True
+3        eICU               GBM - MAP  sensitivity_new -0.0583 -0.0884 -0.0301   0.001   0.009                   True
+4        eICU  SA-kappa[newGBM] - GBM  sensitivity_new  0.0621  0.0401  0.0871   0.001   0.009                   True
+5     VitalDB  SA-kappa[newGBM] - GBM  sensitivity_new -0.1328 -0.1974 -0.0708   0.001   0.009                   True
+6     VitalDB               GBM - MAP  sensitivity_new -0.0664 -0.1256 -0.0116   0.021   0.063                  False
+7        eICU  SA-kappa[newGBM] - GBM      sensitivity -0.0093 -0.0180 -0.0008   0.041   0.082                  False
+8     VitalDB  SA-kappa[newGBM] - GBM      sensitivity -0.0030 -0.0251  0.0203   0.793   0.793                  False  [rss 6.9 GB]
